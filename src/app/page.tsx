@@ -867,26 +867,26 @@ export default function SovereignCharacterPortfolio() {
                 <div className="flex gap-3">
                   <a href="#" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaTwitter size={18}/></a>
                   <a href="https://www.facebook.com/akumahonoyami" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaFacebook size={18}/></a>
-                  <a href="#" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaInstagram size={18}/></a>
+                  <a href="https://www.instagram.com/kuru.3437/" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaInstagram size={18}/></a>
                 </div>
               </div>
 
               <p className="text-zinc-400 font-light leading-relaxed mb-10 max-w-sm">
-                Have a question or need assistance? Reach out to our dedicated support team. We're here to help with any inquiries you may have.
+                Have a project in mind, a partnership proposal, or just want to talk systems design and game development? Drop a message below. Whether you are looking to collaborate with ARK or discuss technical execution, I’m always open to high-impact opportunities.
               </p>
               
               <ul className="space-y-5">
                 <li className="flex items-center gap-4 text-zinc-300 font-light text-sm">
                   <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0"><Check size={12}/></div>
-                  Personalized assistance
+                  Strategic Collaboration: Let’s discuss scaling organizational systems or joint ventures.
                 </li>
                 <li className="flex items-center gap-4 text-zinc-300 font-light text-sm">
                   <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0"><Check size={12}/></div>
-                  Timely response
+                  Technical Execution: Inquiries regarding game development, pipelines, or performance editing.
                 </li>
                 <li className="flex items-center gap-4 text-zinc-300 font-light text-sm">
                   <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0"><Check size={12}/></div>
-                  Comprehensive support
+                  Direct Access: Skip the layers—you are communicating directly with the founder.
                 </li>
               </ul>
             </div>
@@ -904,25 +904,25 @@ export default function SovereignCharacterPortfolio() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
             <GlassPanel className="p-8">
               <Mail className="text-zinc-400 mb-6" size={24}/>
-              <h4 className="text-white font-bold mb-2">Email us</h4>
+              <h4 className="text-white font-bold mb-2">Email Me</h4>
               <p className="text-sm text-zinc-500 font-light">melcarl.chacon@gmail.com</p>
             </GlassPanel>
             <GlassPanel className="p-8">
               <Phone className="text-zinc-400 mb-6" size={24}/>
               <h4 className="text-white font-bold mb-2">Call us</h4>
-              <p className="text-sm text-zinc-500 font-light">+63 (0) System Network</p>
+              <p className="text-sm text-zinc-500 font-light">+63 (9936907577)</p>
             </GlassPanel>
             <GlassPanel className="p-8">
               <MapPin className="text-zinc-400 mb-6" size={24}/>
-              <h4 className="text-white font-bold mb-2">Our location</h4>
+              <h4 className="text-white font-bold mb-2">Network & Operations</h4>
               <p className="text-sm text-zinc-500 font-light">Manila, Philippines</p>
             </GlassPanel>
           </div>
 
           <div className="text-center mt-32 relative z-10 flex flex-col items-center">
             <span className="px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-mono text-zinc-500 tracking-widest mb-6">Testimonials</span>
-            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2">Reviews from 100+</h3>
-            <h3 className="text-3xl md:text-5xl font-serif italic text-zinc-400">clients & peers</h3>
+            <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2">Endorsements & Reviews</h3>
+            <h3 className="text-3xl md:text-5xl font-serif italic text-zinc-400">Trusted by 100+ peers, developers, and collaborators across the local tech and game dev ecosystem.</h3>
             <p className="text-center text-[9px] font-mono text-zinc-600 tracking-widest uppercase mt-20">© 2026 // Engineered for Absolute Execution.</p>
           </div>
         </div>
