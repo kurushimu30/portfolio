@@ -8,6 +8,52 @@ import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa';
 // --- DATA LAYER ---
 const LOGOS = ["DATACAMP", "AWS CLOUD CLUB", "DEVCON", "YGG PLAY SUMMIT", "PBW", "AFK", "GADGETS MAGAZINE"];
 
+const PROJECTS_ARK = [
+  {
+    category: "Flagship Deployment",
+    title: "Code White",
+    subtitle: "/ The Observer",
+    impact: "Psychological Analog Horror",
+    // We treat the logo as the grand visual rather than a thumbnail
+    image: "/events/CodeWhite.png", 
+    imageScaling: "w-[75%] h-[75%] object-contain drop-shadow-2xl", // Special constraint for the logo
+    lore: "Architected representing the ARK guild on the national stage at PGDX, engineered as a flagship demonstration of systemic, suspenseful analog framework architecture.",
+    buffs: ["+ National Exhibition", "+ Analog Horror Mech", "+ Game Systems Design"]
+  },
+  {
+    category: "Sovereign Deployment",
+    title: "Thynkora AI",
+    subtitle: "Web3/AI Sovereign Systems",
+    image: "/events/thynkora_dashboard.png",
+    // Dashboard scales edge-to-edge to fill the bento box
+    imageScaling: "absolute inset-0 w-full h-full object-cover object-top filter contrast-[1.05]",
+    lore: "World Hackathon Finals deployment for ICP Hub. Engineered sovereign Next.js and Motoko smart contracts bridging decentralized Web2 interfaces to Web3 blockchain infrastructure.",
+    buffs: ["+ Web3 Architecture", "+ Sovereign Engineering", "+ High-Pressure Execution"],
+    link: "https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI",
+  },
+  {
+    category: "Ecosystem Deployment",
+    title: "ARK Incubator Ships",
+    subtitle: "SOP Guild Management",
+    lore: "Engineered the organizational runway for ARK members to seamlessly deploy operational builds to Itch.io and achieve national recognition.",
+    buffs: ["+ Ecosystem Scaling", "+ Pipeline Engineering", "+ Node Leadership"],
+    ships: [
+      { name: "Bangungot", img: "/events/bangungot.jpg", link: "https://leeprince.itch.io/bangungot" },
+      { name: "Checkmate", img: "/events/checkmate.png", link: "https://jokumaaa.itch.io/checkmate" }
+    ]
+  },
+  {
+    category: "Institutional Deployment",
+    title: "BSIT Portal",
+    subtitle: "中央 Institutional Digitization (May 2026)",
+    image: "/events/DIT.png",
+    // Portal screenshot scales edge-to-edge, flush with card edges
+    imageScaling: "absolute inset-0 w-full h-full object-cover object-top filter brightness-90 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-700",
+    lore: "Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson.",
+    buffs: ["+ Institutional Trust", "+ Cognitive Bandwidth", "+ Systems Design"]
+  }
+];
+
 const FEATURED_ACCOLADE = { 
   metric: "WORLD FINALIST", 
   title: "Global Hackathon Achievement", 
@@ -530,7 +576,7 @@ export default function SovereignCharacterPortfolio() {
         </div>
       </section>
 
-{/* ========================================== */}
+      {/* ========================================== */}
       {/* 06. EXECUTIVE RECORD (Character Passives)  */}
       {/* ========================================== */}
       <section ref={recordsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/80 border-y border-white/5 relative z-20 backdrop-blur-sm snap-start">
@@ -811,107 +857,200 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 05. CORE ENGINEERING (Projects Bento)      */}
       {/* ========================================== */}
-      <section ref={projectsRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5">
+      <section ref={projectsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 border-t border-white/5 relative z-20 backdrop-blur-sm snap-start">
         <div className="max-w-7xl mx-auto w-full">
           
-          <div className="mb-20">
-            <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Phase 2</span>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">System Architecture.</h2>
-            <p className="text-sm text-zinc-300 font-medium max-w-2xl leading-relaxed">
-              Verified software blueprints, interactive application pipelines, and flagship game builds engineered under absolute execution.
+          <div className="mb-16 text-center relative">
+            <span className="text-xs font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block pl-4 border-l-2 border-red-700 w-fit mx-auto">// Core Operational Deployments</span>
+            <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-white">System Architecture.</h2>
+            <p className="text-base text-zinc-300 font-medium max-w-2xl leading-relaxed mx-auto">
+              A comprehensive ledger of verified software blueprints, interactive application pipelines, and flagship game builds engineered under absolute execution within the ARK ecosystem.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             
-            {/* FLAGSHIP: CODE WHITE */}
-            <GlassPanel borderLabel="FLAGSHIP.BUILD" className="md:col-span-12 lg:col-span-7 p-8 md:p-10 flex flex-col group min-h-[500px]">
-              <div className="absolute inset-0 z-0">
-                <img src="events/CodeWhite.png" alt="Code White Concept Grid" className="w-full h-full object-cover opacity-[0.05] group-hover:scale-102 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d12] via-[#0d0d12]/90 to-transparent" />
-              </div>
+          {/* HIGH-LEVEL PROJECT GRID (ACHIEVEMENT STYLE) */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24 relative z-10">
+            
+            {/* FEATURED FLAGSHIP: CODE WHITE - FULL WIDTH (12 COLS) */}
+            <div className="group relative rounded-[24px] p-[2px] col-span-1 md:col-span-12 overflow-hidden shadow-[0_0_40px_rgba(220,38,38,0.2)] cursor-default">
+              {/* Spinning Glow Border */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none"
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }}
+              />
+              <div className="absolute inset-0 border border-red-500/20 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
               
-              <div className="flex justify-between items-start mb-6 z-10 relative">
-                <span className="px-3 py-1 bg-red-900/20 text-red-400 border border-red-900/30 rounded-full text-[10px] font-mono uppercase tracking-widest flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"/> Product Deployment
-                </span>
-                <span className="flex items-center gap-2 text-[10px] font-mono text-zinc-400 bg-black/40 px-3 py-1 rounded border border-white/5 backdrop-blur-md"><Target size={12}/> Target: PGDX July 2026</span>
+              <div className="bg-[#0a0a0d] relative z-20 w-full h-full rounded-[22px] p-8 md:p-12 flex flex-col lg:flex-row items-stretch gap-12">
+                 <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 blur-[100px] pointer-events-none z-0" />
+                 
+                 <div className="flex-1 flex flex-col justify-center relative z-10">
+                   <h4 className="font-bold text-xs text-red-500 uppercase tracking-[0.3em] mb-4 font-mono border-b border-red-900/50 pb-2 w-fit">Mythic ARK Deployment</h4>
+                   <span className="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter uppercase drop-shadow-lg block mb-4">Code White</span>
+                   <p className="text-sm text-zinc-400 font-mono mb-8 uppercase tracking-wider flex items-center gap-2">
+                     / The Observer <span className="text-red-600 font-bold">• Flagship Exhibition Asset</span>
+                   </p>
+                   
+                   <div className="bg-red-500/[0.05] border-l-2 border-red-500 pl-5 py-4 mb-8 relative overflow-hidden group/lore">
+                      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay group-hover/lore:scale-110 transition-transform duration-700 pointer-events-none" />
+                      <p className="text-base text-zinc-300 font-light leading-relaxed italic relative z-10">
+                         "Architected representing the ARK guild on the national stage at PGDX, engineered as a flagship demonstration of systemic, suspenseful analog framework architecture."
+                      </p>
+                   </div>
+
+                   <div className="flex flex-wrap gap-3">
+                      {["+ National Exhibition", "+ Analog Horror Mech", "+ Game Systems Design"].map((buff, idx) => (
+                         <span key={idx} className="px-4 py-1.5 bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono tracking-widest uppercase rounded">
+                            {buff}
+                         </span>
+                      ))}
+                   </div>
+                 </div>
+
+                 {/* CODE WHITE PRESENTATION FRAME */}
+                 <div className="w-full lg:w-1/2 aspect-video border border-white/10 rounded-3xl overflow-hidden bg-[#09090c] shadow-[inset_0_4px_20px_rgba(0,0,0,0.5)] shrink-0 self-center flex items-center justify-center p-12 md:p-16 relative z-10">
+                   <img src="/events/CodeWhite.png" alt="Code White Flagship Logo" className="w-full h-full object-contain drop-shadow-2xl filter contrast-[1.1] group-hover:scale-105 transition-transform duration-500" />
+                 </div>
               </div>
+            </div>
+
+            {/* REGULAR DEPLOYMENT: THYNKORA AI - HALF WIDTH (6 COLS) */}
+            <div className="group relative rounded-[24px] p-[2px] col-span-1 lg:col-span-6 overflow-hidden cursor-default shadow-lg flex flex-col">
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none" 
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #22d3ee 30%, transparent 50%)` }} 
+              />
+              <div className="absolute inset-0 border border-white/10 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
               
-              <div className="flex flex-col gap-8 items-stretch justify-between h-full flex-1 z-10 relative">
-                <div className="flex-1 flex flex-col justify-start gap-6">
-                  <div className="space-y-4">
-                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">Code White <br/><span className="text-zinc-400 text-2xl md:text-3xl">/ The Observer</span></h3>
-                    <p className="text-sm text-white font-normal leading-relaxed max-w-md">Psychological and analog horror game exhibition asset representing the ARK guild on the national stage.</p>
+              <div className="bg-[#0e0e12] w-full h-full rounded-[22px] p-8 md:p-10 flex flex-col relative z-20">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.15] transition-opacity duration-500 z-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, #22d3ee, transparent 70%)` }} />
+                
+                <div className="flex justify-between items-start z-10 relative mb-8">
+                   <div className="text-cyan-400 bg-cyan-500/10 w-fit p-5 rounded-2xl border border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.15)] group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-500">
+                      <Code size={28} />
+                   </div>
+                   <div className="flex items-center gap-3">
+                     <a href="https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:border-cyan-500/50 hover:bg-cyan-950/40 hover:text-cyan-400 transition-colors"><ExternalLink size={20}/></a>
+                     <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest border border-white/5 bg-white/5 px-3 py-1.5 rounded">Build Active</span>
+                   </div>
+                </div>
+                
+                <div className="z-10 relative flex-1 flex flex-col">
+                  <h4 className="font-bold text-xs text-cyan-400 uppercase tracking-widest mb-3 font-mono">Sovereign Deployment</h4>
+                  <span className="text-4xl md:text-5xl font-black text-white block leading-tight mb-3 tracking-tight">Thynkora AI</span>
+                  <p className="text-xs md:text-sm text-zinc-400 font-mono mb-6 pb-6 border-b border-white/10">World Hackathon Finals deployment for ICP Hub</p>
+                  
+                  <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed italic mb-8">"Engineered sovereign Next.js and Motoko smart contracts bridging decentralized Web2 interfaces to Web3 blockchain infrastructure."</p>
+                  
+                  {/* Dashboard Image - Now taller and edge-to-edge */}
+                  <div className="mt-auto w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-[#09090c] shadow-lg relative z-10 mb-6">
+                    <img src="/events/thynkora_dashboard.png" alt="Thynkora UI System" className="w-full h-full object-cover object-top filter contrast-[1.05]" />
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {["+ Web3 Architecture", "+ Sovereign Engineering", "+ High-Pressure Execution"].map((buff, idx) => (
+                      <span key={idx} className="text-xs font-mono text-cyan-300 flex items-center gap-2 bg-cyan-950/20 px-3 py-1.5 rounded border border-cyan-900/30">
+                         <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"/> {buff}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* REGULAR DEPLOYMENT: ARK INCUBATOR - HALF WIDTH (6 COLS) */}
+            <div className="group relative rounded-[24px] p-[2px] col-span-1 lg:col-span-6 overflow-hidden cursor-default shadow-lg flex flex-col">
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none" 
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }} 
+              />
+              <div className="absolute inset-0 border border-white/10 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+              
+              <div className="bg-[#0e0e12] w-full h-full rounded-[22px] p-8 md:p-10 flex flex-col relative z-20">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.15] transition-opacity duration-500 z-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, #ef4444, transparent 70%)` }} />
+                
+                <div className="flex justify-between items-start z-10 relative mb-8">
+                   <div className="text-red-500 bg-red-500/10 w-fit p-5 rounded-2xl border border-red-500/20 shadow-[0_0_20px_rgba(220,38,38,0.15)] group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-500">
+                      <Swords size={28} />
+                   </div>
+                   <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest border border-white/5 bg-white/5 px-3 py-1.5 rounded">Pipeline Stable</span>
+                </div>
+                
+                <div className="z-10 relative flex-1 flex flex-col">
+                  <h4 className="font-bold text-xs text-red-400 uppercase tracking-widest mb-3 font-mono">Guild Incubation Architecture</h4>
+                  <span className="text-4xl md:text-5xl font-black text-white block leading-tight mb-3 tracking-tight">ARK Incubator</span>
+                  <p className="text-xs md:text-sm text-zinc-400 font-mono mb-6 pb-6 border-b border-white/10">Pipeline ships achieving national competitive status</p>
+                  
+                  <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed italic mb-8">"Engineered the organizational runway for ARK members to seamlessly deploy operational builds to Itch.io and achieve national recognition."</p>
+                  
+                  {/* Ships Grid - Enlarged aspect ratios */}
+                  <div className="mt-auto grid grid-cols-2 gap-4 mb-6 relative z-10">
+                    <div className="flex flex-col gap-3 group/item">
+                      <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-[#09090c] shadow-lg relative z-10">
+                        <img src="/events/bangungot.jpg" alt="Bangungot Cover" className="absolute inset-0 w-full h-full object-cover object-center group-hover/item:scale-105 transition-transform duration-500" />
+                      </div>
+                      <a href="https://leeprince.itch.io/bangungot" target="_blank" rel="noreferrer" className="text-xs font-mono uppercase text-red-400 flex items-center gap-1.5 hover:text-white transition-colors">Bangungot <ExternalLink size={12}/></a>
+                    </div>
+                    <div className="flex flex-col gap-3 group/item">
+                      <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-[#09090c] shadow-lg relative z-10">
+                        <img src="/events/checkmate.png" alt="Checkmate Cover" className="absolute inset-0 w-full h-full object-cover object-center group-hover/item:scale-105 transition-transform duration-500" />
+                      </div>
+                      <a href="https://jokumaaa.itch.io/checkmate" target="_blank" rel="noreferrer" className="text-xs font-mono uppercase text-red-400 flex items-center gap-1.5 hover:text-white transition-colors">Checkmate <ExternalLink size={12}/></a>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {["+ Ecosystem Scaling", "+ Pipeline Engineering", "+ Node Leadership"].map((buff, idx) => (
+                      <span key={idx} className="text-xs font-mono text-red-300 flex items-center gap-2 bg-red-950/20 px-3 py-1.5 rounded border border-red-900/30">
+                         <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"/> {buff}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* REGULAR DEPLOYMENT: BSIT PORTAL - FULL WIDTH HORIZONTAL (12 COLS) */}
+            <div className="group relative rounded-[24px] p-[2px] col-span-1 md:col-span-12 overflow-hidden cursor-default shadow-lg flex flex-col">
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none" 
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }} 
+              />
+              <div className="absolute inset-0 border border-white/10 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+              
+              <div className="bg-[#0e0e12] w-full h-full rounded-[22px] p-8 md:p-12 flex flex-col lg:flex-row items-center gap-12 relative z-20">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.10] transition-opacity duration-500 z-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, #ef4444, transparent 70%)` }} />
+                
+                {/* Left Side: Information */}
+                <div className="w-full lg:w-5/12 z-10 relative flex-1 flex flex-col">
+                  <div className="flex justify-between items-start mb-6">
+                     <div className="text-red-500 bg-red-500/10 w-fit p-4 rounded-2xl border border-red-500/20 shadow-[0_0_20px_rgba(220,38,38,0.15)] group-hover:scale-110 transition-all duration-500">
+                        <Target size={28} />
+                     </div>
+                     <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest border border-white/5 bg-white/5 px-3 py-1.5 rounded">Institutional Verified</span>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2.5 mt-4">
-                    <span className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-xl text-[10px] font-mono text-zinc-100 font-semibold shadow-inner whitespace-nowrap">Mech: Anxiety Meter</span>
-                    <span className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-xl text-[10px] font-mono text-zinc-100 font-semibold shadow-inner whitespace-nowrap">Mech: Spatial Eye Portals</span>
+                  <h4 className="font-bold text-xs text-red-400 uppercase tracking-widest mb-3 font-mono">Institutional Integration Deployment</h4>
+                  <span className="text-4xl md:text-5xl font-black text-white block leading-tight mb-3 tracking-tight">BSIT Portal</span>
+                  <p className="text-xs md:text-sm text-zinc-400 font-mono mb-6 pb-6 border-b border-white/10">Architecture for Departmental Digitization (May 2026)</p>
+                  
+                  <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed italic mb-8">"Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson."</p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {["+ Institutional Trust", "+ Cognitive Bandwidth", "+ Systems Design"].map((buff, idx) => (
+                      <span key={idx} className="text-xs font-mono text-red-300 flex items-center gap-2 bg-red-950/20 px-3 py-1.5 rounded border border-red-900/30">
+                         <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"/> {buff}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <div className="w-full aspect-video border border-white/10 rounded-2xl overflow-hidden bg-black/40 shadow-2xl shrink-0 self-center">
-                  <img src="events/CodeWhite.png" alt="Code White Cinematic Visual" className="w-full h-full object-cover filter contrast-[1.1]" />
+                {/* Right Side: Massive Portal Image */}
+                <div className="w-1/5 lg:w-7/12 aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-[#09090c] shadow-[inset_0_4px_20px_rgba(0,0,0,0.5)] relative z-10 shrink-0">
+                   <img src="/events/DIT.png" alt="BSIT Portal Screenshot" className="w-full h-full object-cover object-top filter brightness-[0.85] group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-700" />
                 </div>
               </div>
-            </GlassPanel>
-
-            {/* THYNKORA AI - EXPANDED SOVEREIGN BOX */}
-            <GlassPanel borderLabel="WEB3.SYS" className="md:col-span-12 lg:col-span-5 p-8 flex flex-col group border-cyan-500/20 bg-cyan-500/[0.02]">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[80px] pointer-events-none z-0" />
-              <div className="flex justify-between items-center mb-8 relative z-10">
-                <span className="text-cyan-400 bg-cyan-500/10 p-3 rounded-xl border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]"><Code size={24} /></span>
-                <a href="https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors"><ExternalLink size={16}/></a>
-              </div>
-              <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-2 text-white relative z-10">Thynkora AI</h3>
-              <p className="text-sm text-cyan-400 font-bold mb-6 relative z-10 uppercase tracking-widest flex items-center gap-2">
-                <Globe size={14}/> Sovereign Engineering
-              </p>
-              <p className="text-sm text-zinc-300 font-light mb-8 relative z-10 leading-relaxed">
-                World Hackathon Finals deployment for ICP Hub. Engineered Next.js and Motoko smart contracts to bridge Web2 interfaces securely to Web3 blockchain infrastructure.
-              </p>
-              <div className="mt-auto aspect-video mb-6 rounded-xl overflow-hidden border border-white/10 bg-black shadow-lg relative z-10">
-                <img src="/events/thynkora_dashboard.png" alt="Thynkora UI System" className="w-full h-full object-cover filter contrast-[1.05]" />
-              </div>
-              <p className="text-[10px] font-mono text-zinc-400 uppercase relative z-10 bg-black/40 px-3 py-2 rounded-lg border border-white/5 w-fit">Tech Stack: Next.js / Motoko / Web3</p>
-            </GlassPanel>
-
-            {/* INCUBATED SHIPS */}
-            <GlassPanel borderLabel="GUILD.SHIPS" className="md:col-span-6 lg:col-span-6 p-8 flex flex-col">
-              <div className="flex justify-between items-center mb-6 relative z-10">
-                 <h3 className="text-xl font-bold flex items-center gap-2 text-white"><Swords size={18} className="text-red-500"/> Incubator Pipeline Ships</h3>
-                 <span className="text-[10px] font-mono text-zinc-300 bg-white/5 px-2 py-1 rounded border border-white/5">DEVCON Finals</span>
-              </div>
-              <p className="text-sm text-white font-normal mb-6 relative z-10">Engineered the organizational runway for ARK members to hit national status and deploy to Itch.io.</p>
-              <div className="grid grid-cols-2 gap-4 mt-auto relative z-10">
-                <div className="space-y-3 group/item">
-                  <div className="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black group-hover/item:border-red-500/50 transition-colors">
-                    <img src="/events/bangungot.jpg" alt="Bangungot Cover" className="w-full h-full object-cover" />
-                  </div>
-                  <a href="https://leeprince.itch.io/bangungot" target="_blank" rel="noreferrer" className="text-[10px] font-mono uppercase text-red-400 flex items-center gap-1 hover:text-white transition-colors">Bangungot <ExternalLink size={10}/></a>
-                </div>
-                <div className="space-y-3 group/item">
-                  <div className="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black group-hover/item:border-red-500/50 transition-colors">
-                    <img src="/events/checkmate.png" alt="Checkmate Cover" className="w-full h-full object-cover" />
-                  </div>
-                  <a href="https://jokumaaa.itch.io/checkmate" target="_blank" rel="noreferrer" className="text-[10px] font-mono uppercase text-red-400 flex items-center gap-1 hover:text-white transition-colors">Checkmate <ExternalLink size={10}/></a>
-                </div>
-              </div>
-            </GlassPanel>
-
-            {/* BSIT PORTAL - ENLARGED IMAGE */}
-            <GlassPanel borderLabel="INST.PORTAL" className="md:col-span-12 lg:col-span-6 p-8 flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-1 relative z-10">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-2 block border-l-2 border-red-500 pl-2">Institutional Integration</span>
-                <h3 className="text-2xl font-bold mb-3 text-white">BSIT Accreditation Portal</h3>
-                <p className="text-sm text-zinc-300 font-normal leading-relaxed mb-6">Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson.</p>
-                <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-[10px] font-mono text-zinc-400 shadow-inner">Deployed May 2026</span>
-              </div>
-              <div className="w-full md:w-72 aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-black shadow-xl relative z-10 shrink-0">
-                 <img src="/events/DIT.png" alt="Portal Schematic Capture" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              </div>
-            </GlassPanel>
+            </div>
+            
           </div>
         </div>
       </section>
