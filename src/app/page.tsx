@@ -1055,129 +1055,135 @@ export default function SovereignCharacterPortfolio() {
         </div>
       </section>
 
-      {/* ========================================== */}
+{/* ========================================== */}
       {/* 09. NEW: ARK ECOSYSTEM BREAKDOWN           */}
       {/* ========================================== */}
       <section ref={arkRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5 bg-[#09090d]">
         <div className="max-w-7xl mx-auto w-full">
           
-          <div className="flex flex-col lg:flex-row gap-16 items-start">
+          <div className="flex flex-col lg:flex-row gap-16 items-start relative z-10">
             
-            {/* Left Column: The Narrative & Access */}
-            <div className="lg:w-1/3 flex flex-col gap-8">
-              <div>
-                <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Ecosystem Architecture</span>
+            {/* Left Column: The Narrative, Logo & Quote */}
+            <div className="w-full lg:w-1/3 flex flex-col gap-8 relative">
+              {/* Massive ambient glow behind the title */}
+              <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 blur-[120px] pointer-events-none z-0" />
+              
+              <div className="relative z-10">
+                <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block border-l-2 border-red-700 pl-3 w-fit">// Ecosystem Architecture</span>
                 <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-[0.85] text-white">ARK<br/><span className="text-3xl md:text-5xl text-zinc-500">Ph.Tech</span></h2>
               </div>
-              <p className="text-base text-zinc-300 font-light leading-relaxed">
+              
+              {/* ARK Logo Presentation Frame */}
+              <div className="w-32 h-32 md:w-48 md:h-48 rounded-[24px] md:rounded-[32px] overflow-hidden border border-white/10 bg-black shadow-2xl relative z-10 mb-2 shrink-0 group">
+                 <img src="/ark_logo.png" alt="ARK Ecosystem Logo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+
+              <p className="text-base text-zinc-300 font-light leading-relaxed relative z-10">
                 ARK is not just a community; it is a meticulously scaled experiment in organizational autonomy. It acts as a massive operational engine designed to pull raw student potential and forge it into industry-ready deployment pipelines.
               </p>
-              
-              <div className="bg-white/[0.03] border-l-2 border-red-500 p-6 my-2">
-                <p className="text-sm text-white font-bold tracking-wide italic">
+
+              {/* Quote - Placed directly below the description */}
+              <div className="bg-red-500/[0.03] border-l-2 border-red-500 p-6 flex items-center rounded-r-2xl shadow-lg relative z-10">
+                <p className="text-sm md:text-base text-white font-bold tracking-wide italic leading-relaxed">
                   "I do not just build the games. I build the machine that builds the developers."
                 </p>
               </div>
+            </div>
 
-              <a href="https://www.arkph.tech/" target="_blank" rel="noreferrer" className="group relative w-full flex items-center justify-between p-6 bg-[#0e0e12] border border-white/10 rounded-2xl hover:border-red-500/50 transition-all overflow-hidden shadow-2xl">
+            {/* Right Column: The Core Mechanics & Call to Action */}
+            <div className="w-full lg:w-2/3 flex flex-col gap-6 relative z-10">
+              
+              {/* Spinning Ambient Background for the Mechanics Grid */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-10 pointer-events-none z-0 animate-[spin_6s_linear_infinite]"
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }}
+              />
+
+              {/* The 3 Mechanic Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl z-10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-red-500/10 transition-colors duration-500" />
+                  <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-red-600 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-red-500 group-hover:scale-110 group-hover:bg-red-500/20 group-hover:border-red-500/30 transition-all duration-500"><Layers size={24}/></div>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">The 8-Department Topology</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed font-light">
+                      Structured the ecosystem into 8 specialized nodes (Engineering, Media, Member Development, etc.). The framework allows departments to communicate and execute cross-functional tasks without the founder becoming an operational bottleneck.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors shadow-xl z-10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-amber-500/10 transition-colors duration-500" />
+                  <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-amber-500 group-hover:scale-110 group-hover:bg-amber-500/20 group-hover:border-amber-500/30 transition-all duration-500"><Terminal size={24}/></div>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Gamified Progression Loop</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed font-light">
+                      Implemented standard operating procedures structured like RPG progression. Raw first-year volunteer nodes level up through structured task completion, transforming into highly autonomous project facilitators.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors shadow-xl z-10 md:col-span-2">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-cyan-500/10 transition-colors duration-500" />
+                  <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col md:flex-row gap-8 items-start md:items-center">
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
+                    
+                    <div className="flex-1">
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-cyan-500 group-hover:scale-110 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/30 transition-all duration-500"><Activity size={24}/></div>
+                      <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">High-Scale Asset Velocity</h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed font-light max-w-xl">
+                        By stabilizing the internal architecture, ARK maintains an active pipeline of 100+ student creators. This operational velocity allows us to continuously conceptualize, build, and ship production-ready assets to national events and exhibitions seamlessly.
+                      </p>
+                    </div>
+                    
+                    {/* Internal Metrics Display inside the card */}
+                    <div className="flex flex-row md:flex-col gap-6 md:gap-8 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-10 w-full md:w-auto shrink-0 mt-6 md:mt-0">
+                      <div>
+                        <span className="block text-4xl md:text-5xl font-black text-white tracking-tighter">100+</span>
+                        <span className="text-[10px] font-mono text-cyan-500 uppercase tracking-widest flex items-center gap-2 mt-1">
+                          <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" /> Active Creators
+                        </span>
+                      </div>
+                      <div>
+                        <span className="block text-4xl md:text-5xl font-black text-white tracking-tighter">8</span>
+                        <span className="text-[10px] font-mono text-cyan-500 uppercase tracking-widest flex items-center gap-2 mt-1">
+                           <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" /> Core Divisions
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Live Domain Button - Placed directly below the Velocity Card */}
+              <a href="https://www.arkph.tech/" target="_blank" rel="noreferrer" className="w-full group relative flex items-center justify-between p-6 bg-[#0e0e12] border border-red-500/20 rounded-2xl hover:border-red-500/60 transition-all overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.1)] mt-2 z-10">
                 <div className="absolute inset-0 w-full h-full bg-red-600/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 <div className="relative z-10 flex flex-col">
                   <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest mb-1 block">Live Domain</span>
-                  <span className="text-white font-bold text-lg">Access Ecosystem Interface</span>
+                  <span className="text-white font-bold text-base md:text-lg">Access Ecosystem Interface</span>
                 </div>
-                <Globe size={24} className="text-zinc-500 group-hover:text-white relative z-10 transition-colors"/>
+                <Globe size={24} className="text-red-500 group-hover:text-white relative z-10 transition-colors group-hover:animate-pulse shrink-0"/>
               </a>
-            </div>
 
-            {/* Right Column: The Core Mechanics (GlassPanels) */}
-            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-              
-              <GlassPanel className="p-8">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-red-500"><Layers size={20}/></div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">The 8-Department Topology</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                  Structured the ecosystem into 8 specialized nodes (Engineering, Media, Member Development, etc.). The framework allows departments to communicate and execute cross-functional tasks without the founder becoming an operational bottleneck.
-                </p>
-              </GlassPanel>
-
-              <GlassPanel className="p-8">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-amber-500"><Terminal size={20}/></div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Gamified Progression Loop</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                  Implemented standard operating procedures structured like RPG progression. Raw first-year volunteer nodes level up through structured task completion, transforming into highly autonomous project facilitators.
-                </p>
-              </GlassPanel>
-
-              <GlassPanel className="p-8 md:col-span-2">
-                <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
-                  <div className="flex-1">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-cyan-500"><Activity size={20}/></div>
-                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">High-Scale Asset Velocity</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed font-light max-w-xl">
-                      By stabilizing the internal architecture, ARK maintains an active pipeline of 100+ student creators. This operational velocity allows us to continuously conceptualize, build, and ship production-ready assets to national events and exhibitions seamlessly.
-                    </p>
-                  </div>
-                  
-                  {/* Internal Metrics Display inside the card */}
-                  <div className="flex md:flex-col gap-4 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 w-full md:w-auto shrink-0">
-                    <div>
-                      <span className="block text-3xl font-black text-white tracking-tighter">100+</span>
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Active Creators</span>
-                    </div>
-                    <div>
-                      <span className="block text-3xl font-black text-white tracking-tighter">8</span>
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Core Divisions</span>
-                    </div>
-                  </div>
-                </div>
-              </GlassPanel>
             </div>
           </div>
 
-          {/* ECOSYSTEM TRUST & ALIGNMENTS MOVED INTO ARK SECTION */}
-          <div className="mt-24 pt-16 border-t border-white/5 w-full">
-            <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-12 flex items-center justify-center gap-4">
-              <span className="w-12 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-12 h-[1px] bg-zinc-700"/>
+          {/* ECOSYSTEM TRUST & ALIGNMENTS */}
+          <div className="mt-32 pt-20 border-t border-white/5 w-full relative z-10">
+            <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-16 flex items-center justify-center gap-6">
+              <span className="w-16 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-16 h-[1px] bg-zinc-700"/>
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 items-center justify-items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center justify-items-center opacity-50 hover:opacity-100 transition-opacity duration-500">
               {LOGOS.map((logo, i) => (
-                <div key={i} className="w-full aspect-[2/1] border border-white/5 rounded-xl flex items-center justify-center bg-black/40 hover:border-red-900/30 hover:bg-white/5 transition-colors cursor-pointer group">
-                  <span className="font-mono text-[10px] text-zinc-300 font-bold tracking-widest group-hover:text-white transition-colors text-center px-2">{logo}</span>
+                <div key={i} className="w-full aspect-[2/1] border border-white/5 rounded-xl flex items-center justify-center bg-black/40 hover:border-red-900/30 hover:bg-white/5 hover:shadow-[0_0_20px_rgba(220,38,38,0.1)] transition-all cursor-pointer group">
+                  <span className="font-mono text-[10px] md:text-xs text-zinc-400 font-bold tracking-widest group-hover:text-white transition-colors text-center px-4 leading-tight">{logo}</span>
                 </div>
               ))}
             </div>
           </div>
 
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* 07. SYSTEM AUDIT                           */}
-      {/* ========================================== */}
-      <section ref={dataLogsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#0b0b0f] border-t border-white/5 relative z-20 snap-start">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase">System Audit.</h2>
-            <p className="text-red-600 font-mono text-xs uppercase tracking-widest mt-2">Verified Product Pipelines & Repositories</p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {SYSTEM_AUDIT.map((audit, i) => (
-              <a href={audit.link} target="_blank" rel="noreferrer" key={i} className="group flex flex-col p-8 bg-[#0d0d12]/80 backdrop-blur-xl border border-white/10 rounded-[24px] hover:bg-white/[0.03] hover:border-red-600/50 transition-all shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/20 rounded-tl-[24px] group-hover:border-red-500 transition-colors" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20 rounded-br-[24px] group-hover:border-red-500 transition-colors" />
-                
-                <div className="mb-8 flex justify-between items-center">
-                  <span className="text-[10px] font-mono text-red-400 tracking-widest uppercase border border-red-900/30 px-3 py-1 rounded-md bg-red-950/20">{audit.category}</span>
-                  <div className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-red-600 group-hover:scale-110 transition-all">
-                    <ExternalLink size={14} className="text-white/50 group-hover:text-white" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-serif italic mb-4 text-white group-hover:text-red-400 transition-colors">{audit.title}</h3>
-                <p className="text-zinc-300 text-sm leading-relaxed font-normal mt-auto">{audit.desc}</p>
-              </a>
-            ))}
-          </div>
         </div>
       </section>
 
