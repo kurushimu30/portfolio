@@ -35,7 +35,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "MYTHIC FOUNDER", 
     rarityColor: "text-red-500 border-red-500/50 bg-red-500/10 drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]",
     eventImg: "/events/DevConGameJam.jpg", 
-    logoImg: "/logos/ark.jpg" 
+    logoImg: "/logos/ark.jpg",
+    impact: "Architected a 100+ member operational ecosystem from scratch, deploying 8 specialized departments."
   },
   { 
     role: "Executive: Associate of Staff & Partner", 
@@ -44,7 +45,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "LEGENDARY NODE", 
     rarityColor: "text-amber-500 border-amber-500/30 bg-amber-500/10",
     eventImg: "/events/6.JPG", 
-    logoImg: "/logos/DevCon_Manila.jpg" 
+    logoImg: "/logos/DevCon_Manila.jpg",
+    impact: "Commanded regional ecosystem partnerships and executed structural technical deployments."
   },
   { 
     role: "National Delegate", 
@@ -53,7 +55,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "LEGENDARY NODE", 
     rarityColor: "text-amber-500 border-amber-500/30 bg-amber-500/10",
     eventImg: "/events/7.JPG", 
-    logoImg: "/logos/dost.png" 
+    logoImg: "/logos/dost.png",
+    impact: "Selected for an elite state-sponsored technical bootcamp to engineer high-level game frameworks."
   },
   { 
     role: "Operations Staff", 
@@ -62,7 +65,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/PBW_volunteer.jpg", 
-    logoImg: "/logos/PBW.png" 
+    logoImg: "/logos/PBW.png",
+    impact: "Executed core logistical operations for a massive global Web3 and blockchain infrastructure event."
   },
   { 
     role: "Operations Staff", 
@@ -71,7 +75,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/Unleash.jpg", 
-    logoImg: "/logos/UNLEASH.png" 
+    logoImg: "/logos/UNLEASH.png",
+    impact: "Facilitated high-level event logistics for massive-scale tech community gatherings."
   },
   { 
     role: "Event Staff", 
@@ -80,7 +85,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/IoT.jpg", 
-    logoImg: "/logos/Iot.jpg" 
+    logoImg: "/logos/Iot.jpg",
+    impact: "Managed operational workflows for national hardware and Internet-of-Things symposiums."
   },
   { 
     role: "Event Core Partner", 
@@ -89,7 +95,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/TechCareer.JPG", 
-    logoImg: "/logos/ygg.png" 
+    logoImg: "/logos/ygg.png",
+    impact: "Forged strategic talent pipelines bridging local developers with global Web3 gaming communities."
   },
   { 
     role: "Programming Team Support Manager", 
@@ -98,7 +105,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/GameJam CCIS.jpg", 
-    logoImg: "/logos/gdgpup_logo.jpg" 
+    logoImg: "/logos/gdgpup_logo.jpg",
+    impact: "Mentored and scaled institutional programming teams, optimizing developer workflow and output."
   },
   { 
     role: "Core Media Asset Creator & Video Editor", 
@@ -107,7 +115,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/2.JPG", 
-    logoImg: "/logos/aws.png" 
+    logoImg: "/logos/aws.png",
+    impact: "Produced high-converting technical cinematic assets to market cloud infrastructure."
   },
   { 
     role: "Panel Judge - Game Jam", 
@@ -116,7 +125,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "RARE ACHIEVER", 
     rarityColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
     eventImg: "/events/PictureJudge.jpg", 
-    logoImg: "/logos/PUPLogo.png" 
+    logoImg: "/logos/PUPLogo.png",
+    impact: "Adjudicated and audited competitive game architectures for university-wide deployment events."
   },
   { 
     role: "AWS Cloud & Data Science Scholar", 
@@ -125,7 +135,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "RARE ACHIEVER", 
     rarityColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
     eventImg: "/events/4.JPG", 
-    logoImg: "/logos/DC_Donates_logo_inverted.png" 
+    logoImg: "/logos/DC_Donates_logo_inverted.png",
+    impact: "Secured elite data science and cloud architecture fellowship for advanced analytics training."
   },
   { 
     role: "Speaker & Event Host", 
@@ -134,7 +145,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "RARE ACHIEVER", 
     rarityColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
     eventImg: "/events/1.JPG", 
-    logoImg: "/logos/PUPLogo.png" 
+    logoImg: "/logos/PUPLogo.png",
+    impact: "Commanded public communication, delivering high-impact workshops to emerging developers."
   },
   { 
     role: "Research Assistant", 
@@ -143,7 +155,8 @@ const RECONNAISSANCE_BADGES = [
     rarity: "COMMON NODE", 
     rarityColor: "text-zinc-400 border-zinc-500/20 bg-zinc-500/5",
     eventImg: "/events/5.JPG", 
-    logoImg: "/logos/PUPLogo.png" 
+    logoImg: "/logos/PUPLogo.png",
+    impact: "Engineered robust academic validation architectures and backend data management flows."
   },
 ];
 
@@ -236,7 +249,8 @@ const InteractiveBadgeCard = ({ badge, onClick }: { badge: any, onClick: () => v
       />
       <div className="absolute inset-0 border border-white/10 rounded-[20px] z-10 transition-colors duration-500 group-hover:border-transparent" />
 
-      <div className="bg-[#0e0e12] w-full h-full rounded-[18px] p-5 flex flex-col items-center text-center relative z-20 overflow-hidden">
+      {/* Increased padding (p-6 instead of p-5) for a bigger internal footprint */}
+      <div className="bg-[#0e0e12] w-full h-full rounded-[18px] p-6 flex flex-col items-center text-center relative z-20 overflow-hidden">
         <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-zinc-500" />
         <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-zinc-500" />
         <div 
@@ -247,21 +261,26 @@ const InteractiveBadgeCard = ({ badge, onClick }: { badge: any, onClick: () => v
           className="absolute inset-0 opacity-15 group-hover:opacity-30 transition-opacity duration-500 z-0" 
           style={{ background: `radial-gradient(circle at center, ${getGlowColor(badge.rarity)}, transparent 70%)` }}
         />
-        <div className="w-[72px] h-[72px] md:w-20 md:h-20 rounded-2xl overflow-hidden border border-white/10 mb-4 relative z-30 bg-black shadow-inner shrink-0">
+        
+        {/* Enlarged image container (w-20/h-20 instead of 72px, and larger on md screens) */}
+        <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border border-white/10 mb-5 relative z-30 bg-black shadow-inner shrink-0">
           <img src={badge.logoImg} alt={badge.org} className="w-full h-full object-cover filter brightness-[0.85] group-hover:brightness-100 transition-all group-hover:scale-110 duration-500" />
         </div>
+        
         <div className="z-30 w-full flex flex-col items-center flex-1">
-          <span className={`text-[8px] font-mono font-bold tracking-widest uppercase px-2 py-0.5 rounded border mb-2 inline-block shadow-sm bg-[#0e0e12] ${badge.rarityColor}`}>
+          {/* Increased badge label text size and padding */}
+          <span className={`text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded border mb-3 inline-block shadow-sm bg-[#0e0e12] ${badge.rarityColor}`}>
             {badge.rarity}
           </span>
-          <h4 className="text-sm font-bold tracking-tight text-white line-clamp-2 px-1 leading-snug mb-1">{badge.role}</h4>
-          <p className="text-[10px] text-zinc-400 mt-auto w-full line-clamp-1">{badge.org}</p>
+          {/* Increased role text size */}
+          <h4 className="text-base md:text-lg font-bold tracking-tight text-white line-clamp-2 px-1 leading-snug mb-2">{badge.role}</h4>
+          {/* Increased org text size */}
+          <p className="text-xs text-zinc-400 mt-auto w-full line-clamp-2">{badge.org}</p>
         </div>
       </div>
     </div>
   );
 };
-
 
 // --- MAIN APP COMPONENT ---
 export default function SovereignCharacterPortfolio() {
