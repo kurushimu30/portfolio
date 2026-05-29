@@ -2,19 +2,29 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Target, Terminal, Activity, Hexagon, Crosshair, Layers, Play, Award, Shield, Code, Cpu, ChevronRight, Briefcase, Sparkles, Swords, Check, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, Target, Terminal, Activity, Hexagon, Crosshair, Layers, Play, Award, Shield, Code, Cpu, ChevronRight, Briefcase, Sparkles, Swords, Check, Mail, Phone, MapPin, ArrowUpRight, Globe } from 'lucide-react';
 import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa';
 
 // --- DATA LAYER ---
 const LOGOS = ["DATACAMP", "AWS CLOUD CLUB", "DEVCON", "YGG PLAY SUMMIT", "PBW", "AFK", "GADGETS MAGAZINE"];
 
-const ACCOLADES = [
-  { metric: "1.13", title: "Cumulative GWA", subtitle: "Summa Cum Laude Track (PUP BSIT)", icon: <Award size={20}/> },
-  { metric: "PRES", title: "President's List", subtitle: "Distinction Certificate (PUP)", icon: <Shield size={20}/> },
-  { metric: "NATL", title: "National Finalist", subtitle: "World Hackathon Finals (ICP Hub)", link: "https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI", linkText: "Thynkora AI Repo", icon: <Target size={20}/> },
-  { metric: "TOP", title: "Top Finalist", subtitle: "Base Build Blockchain (DOST)", icon: <Hexagon size={20}/> },
-  { metric: "LEAD", title: "Regional Tech Lead", subtitle: "Eneda Hackathon", icon: <Cpu size={20}/> },
-  { metric: "LEAD", title: "Business Analytics", subtitle: "TPG Solar Hackathon", icon: <Activity size={20}/> },
+const FEATURED_ACCOLADE = { 
+  metric: "WORLD FINALIST", 
+  title: "Global Hackathon Achievement", 
+  subtitle: "Thynkora AI - ICP Hub World Finals", 
+  lore: "Competed on the global stage against elite international nodes. Engineered sovereign Web3 contracts using Next.js and Motoko to bridge decentralized systems.",
+  buffs: ["+ Global Tech Visibility", "+ Web3 Architecture", "+ High-Pressure Execution"],
+  link: "https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI", 
+  linkText: "Inspect Repository", 
+  icon: <Globe size={40} className="text-amber-400"/> 
+};
+
+const REGULAR_ACCOLADES = [
+  { metric: "1.13", title: "Cumulative GWA", subtitle: "Summa Cum Laude Track (PUP)", lore: "Sustained elite academic velocity while single-handedly architecting a 100+ member game studio ecosystem.", buffs: ["+ Cognitive Bandwidth", "+ Institutional Trust"], icon: <Award size={24}/> },
+  { metric: "TOP 10", title: "National Finalist", subtitle: "DOST Base Build Blockchain", lore: "Architected decentralized blockchain solutions endorsed for national-level deployment.", buffs: ["+ State Endorsement", "+ System Scaling"], icon: <Hexagon size={24}/> },
+  { metric: "LEAD", title: "Regional Tech Lead", subtitle: "Eneda Hackathon", lore: "Commanded technical deployment pipelines in highly volatile, time-restricted competitive environments.", buffs: ["+ Crisis Management", "+ Node Leadership"], icon: <Cpu size={24}/> },
+  { metric: "DATA", title: "Business Analytics", subtitle: "TPG Solar Hackathon", lore: "Leveraged raw data synthesis to construct strategic, market-ready technical pipelines.", buffs: ["+ Data Synthesis", "+ Strategic Vision"], icon: <Activity size={24}/> },
+  { metric: "PRES", title: "President's List", subtitle: "Distinction Certificate (PUP)", lore: "Flawless academic execution recognized directly by university executives.", buffs: ["+ Academic Sovereignty"], icon: <Shield size={24}/> },
 ];
 
 const RECONNAISSANCE_BADGES = [
@@ -61,16 +71,16 @@ const RECONNAISSANCE_BADGES = [
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/Unleash.jpg", 
-    logoImg: "/logos/DevCon_Manila.jpg" 
+    logoImg: "/logos/UNLEASH.png" 
   },
   { 
-    role: "Operations Staff", 
+    role: "Event Staff", 
     org: "IoT Conference Philippines", 
     domain: "Hardware & Systems Expo", 
     rarity: "EPIC DEPLOYMENT", 
     rarityColor: "text-purple-500 border-purple-500/30 bg-purple-500/10",
     eventImg: "/events/IoT.jpg", 
-    logoImg: "/logos/PUPLogo.png" 
+    logoImg: "/logos/Iot.jpg" 
   },
   { 
     role: "Event Core Partner", 
@@ -260,6 +270,7 @@ export default function SovereignCharacterPortfolio() {
   const projectsRef = useRef<any>(null);
   const recordsRef = useRef<any>(null);
   const dataLogsRef = useRef<any>(null);
+  const arkRef = useRef<any>(null);
   const contactRef = useRef<any>(null);
 
   const [globalMousePos, setGlobalMousePosition] = useState({ x: 0, y: 0 });
@@ -336,6 +347,7 @@ export default function SovereignCharacterPortfolio() {
           <button onClick={() => scrollTo(recordsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Passives"><Briefcase size={16}/></button>
           <button onClick={() => scrollTo(reconRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Recon"><Swords size={16}/></button>
           <button onClick={() => scrollTo(projectsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Architecture"><Layers size={16}/></button>
+          <button onClick={() => scrollTo(arkRef)} className="text-white/40 hover:text-red-500 transition-colors" title="ARK Ecosystem"><Globe size={16}/></button>
           <button onClick={() => scrollTo(dataLogsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Audit"><Activity size={16}/></button>
           <div className="w-3 h-[1px] bg-white/10" />
           <button onClick={() => scrollTo(contactRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Contact"><Mail size={16}/></button>
@@ -351,30 +363,24 @@ export default function SovereignCharacterPortfolio() {
         <div className="relative z-10 w-full max-w-[1400px] h-[85vh] min-h-[680px] bg-[#0b0b0f]/60 backdrop-blur-3xl border border-white/10 rounded-[40px] p-4 flex flex-col md:flex-row gap-4 shadow-2xl">
           
             <div className={`hidden md:flex w-20 bg-white/[0.02] rounded-[32px] border border-white/5 flex-col items-center py-8 justify-between transition-opacity duration-300 ${showHud ? 'opacity-0' : 'opacity-100'}`}>
-            {/* Top Brand Anchor */}
             <div className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.05)]">
               <Hexagon size={18} className="fill-black" />
             </div>
             
-            {/* Synchronized Main Navigation Cluster */}
             <div className="flex flex-col items-center gap-6 text-white/30 my-auto">
               <div className="flex flex-col gap-6">
                 <button onClick={() => scrollTo(recordsRef)} title="Passives" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Briefcase size={22} /></button>
                 <button onClick={() => scrollTo(reconRef)} title="Recon" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Swords size={22} /></button>
                 <button onClick={() => scrollTo(projectsRef)} title="Architecture" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Layers size={22} /></button>
+                <button onClick={() => scrollTo(arkRef)} title="ARK Ecosystem" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Globe size={22} /></button>
                 <button onClick={() => scrollTo(dataLogsRef)} title="Audit" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Activity size={22} /></button>
               </div>
-
-              {/* Structural Section Divider */}
               <div className="w-6 h-[1px] bg-white/10" />
-
-              {/* Contact Information Interface */}
               <div className="flex flex-col gap-6">
                 <button onClick={() => scrollTo(contactRef)} title="Contact Info" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Mail size={22} /></button>
               </div>
             </div>
             
-            {/* Bottom Target Interactive / Reticle */}
             <div className="mt-auto pt-4">
               <button onClick={() => scrollTo(heroRef)} title="Reset Targeting" className="text-red-600/60 hover:text-red-500 hover:scale-110 transition-all duration-200 group">
                 <Crosshair size={22} className="animate-pulse group-hover:rotate-90 transition-transform duration-300" />
@@ -423,8 +429,7 @@ export default function SovereignCharacterPortfolio() {
                 <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Systemic SOP Framework Architecture</li>
                 <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Gamified Organization Task Pipelines</li>
                 <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Decentralized Talent Incubator Architecture</li>
-                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Elite-Level Academic & Operational Multitasking</li>
-                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Sovereign Community Asset Pipeline Engineering</li>
+                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Sovereign Asset Pipeline Engineering</li>
               </ul>
             </GlassPanel>
           </div>
@@ -505,57 +510,139 @@ export default function SovereignCharacterPortfolio() {
         </div>
       </section>
 
-      {/* ========================================== */}
+{/* ========================================== */}
       {/* 06. EXECUTIVE RECORD (Character Passives)  */}
       {/* ========================================== */}
       <section ref={recordsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/80 border-y border-white/5 relative z-20 backdrop-blur-sm snap-start">
         <div className="max-w-7xl mx-auto w-full">
           
-          <div className="mb-12">
-            <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Verified Records</span>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase mb-8">Character Passives.</h2>
+          <div className="mb-16 text-center relative">
+            <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Verified Competition Records</span>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">Character Passives.</h2>
+            <p className="text-sm text-zinc-300 font-medium leading-relaxed mx-auto max-w-2xl">
+              A comprehensive ledger of elite academic standards, world-stage hackathon deployments, and systemic capabilities. Every passive here acts as a permanent multiplier to the ecosystem's baseline velocity.
+            </p>
           </div>
             
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-16">
-            {ACCOLADES.map((item, i) => (
-              <GlassPanel key={i} className="p-6 md:p-8 flex flex-col gap-4 shadow-lg hover:border-red-900/50">
-                <div className="flex justify-between items-start">
-                   <div className="text-red-500 bg-red-500/10 w-fit p-3 rounded-xl border border-red-500/20">{item.icon}</div>
-                   {item.link && (
-                     <a href={item.link} target="_blank" rel="noreferrer" className="text-[9px] font-mono text-zinc-500 hover:text-white flex items-center gap-1 border border-white/5 bg-white/5 px-2 py-1 rounded transition-colors">
-                       {item.linkText} <ExternalLink size={10}/>
-                     </a>
-                   )}
+          {/* HIGHLIGHTED ACHIEVEMENTS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24 relative z-10">
+            
+            {/* FEATURED: WORLD HACKATHON FINALIST */}
+            <div className="group relative rounded-[24px] p-[2px] col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden shadow-[0_0_40px_rgba(245,158,11,0.15)] cursor-default">
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none"
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #f59e0b 30%, transparent 50%)` }}
+              />
+              <div className="absolute inset-0 border border-amber-500/20 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+              
+              <div className="bg-[#0a0a0d] relative z-20 w-full h-full rounded-[22px] p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+                 <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 blur-[100px] pointer-events-none z-0" />
+                 
+                 <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 relative z-10 w-full">
+                   <div className="text-amber-400 bg-amber-500/10 w-fit p-6 rounded-3xl border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.2)] shrink-0 group-hover:scale-110 transition-transform duration-500">
+                     {FEATURED_ACCOLADE.icon}
+                   </div>
+                   
+                   <div className="flex-1 flex flex-col justify-center">
+                     <h4 className="font-bold text-[10px] md:text-xs text-amber-500 uppercase tracking-[0.3em] mb-3 font-mono">Mythic Global Achievement</h4>
+                     <span className="text-4xl md:text-6xl font-black text-white leading-none tracking-tighter uppercase drop-shadow-lg block mb-4">{FEATURED_ACCOLADE.metric}</span>
+                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{FEATURED_ACCOLADE.title}</h3>
+                     <p className="text-sm text-zinc-400 font-mono mb-4">{FEATURED_ACCOLADE.subtitle}</p>
+                     
+                     <div className="bg-amber-500/[0.05] border-l-2 border-amber-500 pl-4 py-3 mb-6">
+                        <p className="text-sm md:text-base text-zinc-300 font-light leading-relaxed italic">"{FEATURED_ACCOLADE.lore}"</p>
+                     </div>
+
+                     <div className="flex flex-wrap gap-2">
+                        {FEATURED_ACCOLADE.buffs.map((buff, idx) => (
+                           <span key={idx} className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-mono tracking-widest uppercase rounded">
+                              {buff}
+                           </span>
+                        ))}
+                     </div>
+                   </div>
+                   
+                   <a href={FEATURED_ACCOLADE.link} target="_blank" rel="noreferrer" className="mt-4 lg:mt-0 text-[10px] font-mono text-amber-500 hover:text-black flex items-center justify-center gap-2 border border-amber-500/30 hover:bg-amber-500 px-6 py-4 rounded-xl transition-colors font-bold uppercase tracking-widest shrink-0 self-start lg:self-center shadow-lg w-full lg:w-auto">
+                     {FEATURED_ACCOLADE.linkText} <ExternalLink size={14}/>
+                   </a>
+                 </div>
+              </div>
+            </div>
+
+            {/* REGULAR ACCOLADES (Recon Style Cards with Lore) */}
+            {REGULAR_ACCOLADES.map((item, i) => (
+              <div key={i} className="group relative rounded-[20px] p-[2px] overflow-hidden cursor-default shadow-lg flex flex-col">
+                <div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none" 
+                  style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }} 
+                />
+                <div className="absolute inset-0 border border-white/10 rounded-[20px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+                
+                <div className="bg-[#0e0e12] w-full h-full rounded-[18px] p-8 flex flex-col relative z-20">
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.15] transition-opacity duration-500 z-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, #ef4444, transparent 70%)` }} />
+                  
+                  <div className="flex justify-between items-start z-10 relative mb-6">
+                     <div className="text-red-500 bg-red-500/10 w-fit p-4 rounded-2xl border border-red-500/20 shadow-[0_0_20px_rgba(220,38,38,0.15)] group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-500">
+                        {item.icon}
+                     </div>
+                     <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest border border-white/5 bg-white/5 px-2 py-1 rounded">Passive Secured</span>
+                  </div>
+                  
+                  <div className="z-10 relative flex-1 flex flex-col">
+                    <h4 className="font-bold text-[10px] text-red-400 uppercase tracking-widest mb-2 font-mono">{item.title}</h4>
+                    <span className="text-3xl md:text-4xl font-black text-white block leading-none mb-2 tracking-tight">{item.metric}</span>
+                    <p className="text-[10px] text-zinc-400 font-mono mb-4 pb-4 border-b border-white/10">{item.subtitle}</p>
+                    
+                    <p className="text-xs text-zinc-300 font-light leading-relaxed italic mb-6">"{item.lore}"</p>
+                    
+                    <div className="mt-auto flex flex-col gap-2">
+                      {item.buffs.map((buff, idx) => (
+                        <span key={idx} className="text-[9px] font-mono text-red-300 flex items-center gap-1.5 bg-red-950/20 px-2 py-1 rounded w-fit border border-red-900/30">
+                           <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse"/> {buff}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <h4 className="font-bold text-[10px] text-red-400 uppercase tracking-widest mb-2 font-mono">{item.title}</h4>
-                  <span className="text-2xl font-black text-white block leading-tight mb-2 tracking-tight">{item.metric}</span>
-                  <p className="text-xs text-zinc-400 font-light">{item.subtitle}</p>
-                </div>
-              </GlassPanel>
+              </div>
             ))}
           </div>
 
-          <GlassPanel borderLabel="MATRIX" className="p-8">
-            <h3 className="text-sm font-mono text-white/40 uppercase tracking-widest mb-8 flex items-center gap-2">
-              <Layers size={14} className="text-red-500"/> Capability Matrices
-            </h3>
+          {/* CAPABILITY MATRICES */}
+          <div className="relative z-10">
+            <div className="flex items-center justify-center gap-4 mb-10">
+              <span className="w-16 h-[1px] bg-red-500/30" />
+              <h3 className="text-sm font-mono text-white/60 uppercase tracking-widest flex items-center gap-2">
+                <Layers size={14} className="text-red-500"/> Core Capability Matrices
+              </h3>
+              <span className="w-16 h-[1px] bg-red-500/30" />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {SKILLS.map((skill, i) => (
-                <div key={i} className="bg-black/40 border border-white/5 rounded-2xl p-6 shadow-inner relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-red-600/50 to-transparent" />
-                  <h4 className="text-white font-bold text-sm mb-5 pb-3 border-b border-white/10">{skill.category}</h4>
-                  <ul className="space-y-3">
-                    {skill.tags.map((tag, idx) => (
-                      <li key={idx} className="text-[11px] font-mono text-zinc-300 flex items-start gap-2">
-                        <span className="text-red-600 mt-0.5">&gt;</span> {tag}
-                      </li>
-                    ))}
-                  </ul>
+                <div key={i} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-red-500/10 transition-colors duration-500" />
+                  
+                  <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
+                    <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-red-600 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
+                    
+                    <h4 className="text-white font-bold text-lg mb-6 pb-4 border-b border-white/10 flex items-center gap-3">
+                      <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" /> {skill.category}
+                    </h4>
+                    
+                    <ul className="space-y-4">
+                      {skill.tags.map((tag, idx) => (
+                        <li key={idx} className="text-xs font-mono text-zinc-300 flex items-center gap-3 group/item">
+                          <span className="text-red-600 opacity-50 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all duration-300">&gt;</span> 
+                          <span className="group-hover/item:text-white transition-colors">{tag}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               ))}
             </div>
-          </GlassPanel>
+          </div>
 
         </div>
       </section>
@@ -699,24 +786,6 @@ export default function SovereignCharacterPortfolio() {
       </section>
 
       {/* ========================================== */}
-      {/* 04. STRATEGIC ALLIANCES                    */}
-      {/* ========================================== */}
-      <section className="py-16 border-y border-white/5 bg-[#0a0a0d] px-6 md:px-24 relative z-20 snap-start">
-        <div className="max-w-6xl mx-auto w-full">
-          <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-12 flex items-center justify-center gap-4">
-            <span className="w-8 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-8 h-[1px] bg-zinc-700"/>
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 items-center justify-items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
-            {LOGOS.map((logo, i) => (
-              <div key={i} className="w-full aspect-[2/1] border border-white/5 rounded-xl flex items-center justify-center bg-black/40 hover:border-red-900/30 hover:bg-white/5 transition-colors cursor-pointer group">
-                <span className="font-mono text-[10px] text-zinc-300 font-bold tracking-widest group-hover:text-white transition-colors">{logo}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================== */}
       {/* 05. CORE ENGINEERING (Projects Bento)      */}
       {/* ========================================== */}
       <section ref={projectsRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5">
@@ -733,9 +802,9 @@ export default function SovereignCharacterPortfolio() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             
             {/* FLAGSHIP: CODE WHITE */}
-            <GlassPanel borderLabel="FLAGSHIP.BUILD" className="md:col-span-12 lg:col-span-8 p-8 md:p-10 flex flex-col group min-h-[500px]">
+            <GlassPanel borderLabel="FLAGSHIP.BUILD" className="md:col-span-12 lg:col-span-7 p-8 md:p-10 flex flex-col group min-h-[500px]">
               <div className="absolute inset-0 z-0">
-                <img src="/CodeWhite.png" alt="Code White Concept Grid" className="w-full h-full object-cover opacity-[0.05] group-hover:scale-102 transition-transform duration-700" />
+                <img src="events/CodeWhite.png" alt="Code White Concept Grid" className="w-full h-full object-cover opacity-[0.05] group-hover:scale-102 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d12] via-[#0d0d12]/90 to-transparent" />
               </div>
               
@@ -746,37 +815,43 @@ export default function SovereignCharacterPortfolio() {
                 <span className="flex items-center gap-2 text-[10px] font-mono text-zinc-400 bg-black/40 px-3 py-1 rounded border border-white/5 backdrop-blur-md"><Target size={12}/> Target: PGDX July 2026</span>
               </div>
               
-              <div className="flex flex-col lg:flex-row gap-8 items-stretch justify-between h-full flex-1 z-10 relative">
+              <div className="flex flex-col gap-8 items-stretch justify-between h-full flex-1 z-10 relative">
                 <div className="flex-1 flex flex-col justify-start gap-6">
                   <div className="space-y-4">
                     <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">Code White <br/><span className="text-zinc-400 text-2xl md:text-3xl">/ The Observer</span></h3>
-                    <p className="text-sm text-white font-normal leading-relaxed">Psychological and analog horror game exhibition asset representing the ARK guild on the national stage.</p>
+                    <p className="text-sm text-white font-normal leading-relaxed max-w-md">Psychological and analog horror game exhibition asset representing the ARK guild on the national stage.</p>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2.5 mt-8 pt-4 border-t border-white/5">
+                  <div className="flex flex-wrap gap-2.5 mt-4">
                     <span className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-xl text-[10px] font-mono text-zinc-100 font-semibold shadow-inner whitespace-nowrap">Mech: Anxiety Meter</span>
                     <span className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-xl text-[10px] font-mono text-zinc-100 font-semibold shadow-inner whitespace-nowrap">Mech: Spatial Eye Portals</span>
                   </div>
                 </div>
 
-                <div className="w-full lg:w-1/2 aspect-video border border-white/10 rounded-2xl overflow-hidden bg-black/40 shadow-2xl shrink-0 self-center">
-                  <img src="/CodeWhite.png" alt="Code White Cinematic Visual" className="w-full h-full object-cover filter contrast-[1.1]" />
+                <div className="w-full aspect-video border border-white/10 rounded-2xl overflow-hidden bg-black/40 shadow-2xl shrink-0 self-center">
+                  <img src="events/CodeWhite.png" alt="Code White Cinematic Visual" className="w-full h-full object-cover filter contrast-[1.1]" />
                 </div>
               </div>
             </GlassPanel>
 
-            {/* THYNKORA AI */}
-            <GlassPanel borderLabel="WEB3.SYS" className="md:col-span-6 lg:col-span-4 p-8 flex flex-col group">
+            {/* THYNKORA AI - EXPANDED SOVEREIGN BOX */}
+            <GlassPanel borderLabel="WEB3.SYS" className="md:col-span-12 lg:col-span-5 p-8 flex flex-col group border-cyan-500/20 bg-cyan-500/[0.02]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[80px] pointer-events-none z-0" />
               <div className="flex justify-between items-center mb-8 relative z-10">
-                <span className="text-red-500 bg-red-500/10 p-2 rounded-lg border border-red-500/20"><Code size={20} /></span>
-                <a href="https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors"><ExternalLink size={14}/></a>
+                <span className="text-cyan-400 bg-cyan-500/10 p-3 rounded-xl border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]"><Code size={24} /></span>
+                <a href="https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors"><ExternalLink size={16}/></a>
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-white relative z-10">Thynkora AI</h3>
-              <p className="text-xs text-white font-serif italic mb-6 relative z-10">World Hackathon Finals (ICP Hub)</p>
+              <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-2 text-white relative z-10">Thynkora AI</h3>
+              <p className="text-sm text-cyan-400 font-bold mb-6 relative z-10 uppercase tracking-widest flex items-center gap-2">
+                <Globe size={14}/> Sovereign Engineering
+              </p>
+              <p className="text-sm text-zinc-300 font-light mb-8 relative z-10 leading-relaxed">
+                World Hackathon Finals deployment for ICP Hub. Engineered Next.js and Motoko smart contracts to bridge Web2 interfaces securely to Web3 blockchain infrastructure.
+              </p>
               <div className="mt-auto aspect-video mb-6 rounded-xl overflow-hidden border border-white/10 bg-black shadow-lg relative z-10">
                 <img src="/events/thynkora_dashboard.png" alt="Thynkora UI System" className="w-full h-full object-cover filter contrast-[1.05]" />
               </div>
-              <p className="text-[10px] font-mono text-zinc-300 uppercase relative z-10">Architecture: Next.js / Motoko / Web3</p>
+              <p className="text-[10px] font-mono text-zinc-400 uppercase relative z-10 bg-black/40 px-3 py-2 rounded-lg border border-white/5 w-fit">Tech Stack: Next.js / Motoko / Web3</p>
             </GlassPanel>
 
             {/* INCUBATED SHIPS */}
@@ -802,19 +877,115 @@ export default function SovereignCharacterPortfolio() {
               </div>
             </GlassPanel>
 
-            {/* BSIT PORTAL */}
-            <GlassPanel borderLabel="INST.PORTAL" className="md:col-span-12 lg:col-span-6 p-8 flex flex-col md:flex-row gap-6 items-center">
+            {/* BSIT PORTAL - ENLARGED IMAGE */}
+            <GlassPanel borderLabel="INST.PORTAL" className="md:col-span-12 lg:col-span-6 p-8 flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1 relative z-10">
                 <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-2 block border-l-2 border-red-500 pl-2">Institutional Integration</span>
-                <h3 className="text-xl font-bold mb-3 text-white">BSIT Accreditation Portal</h3>
-                <p className="text-xs text-white font-normal leading-relaxed mb-4">Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson.</p>
-                <span className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] font-mono text-zinc-400">Deployed May 2026</span>
+                <h3 className="text-2xl font-bold mb-3 text-white">BSIT Accreditation Portal</h3>
+                <p className="text-sm text-zinc-300 font-normal leading-relaxed mb-6">Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson.</p>
+                <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-[10px] font-mono text-zinc-400 shadow-inner">Deployed May 2026</span>
               </div>
-              <div className="w-full md:w-48 aspect-square rounded-xl overflow-hidden border border-white/10 bg-black shadow-lg relative z-10">
-                 <img src="/events/thynkora.jpg" alt="Portal Schematic Capture" className="w-full h-full object-cover" />
+              <div className="w-full md:w-72 aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-black shadow-xl relative z-10 shrink-0">
+                 <img src="/events/DIT.png" alt="Portal Schematic Capture" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
               </div>
             </GlassPanel>
           </div>
+        </div>
+      </section>
+
+      {/* ========================================== */}
+      {/* 09. NEW: ARK ECOSYSTEM BREAKDOWN           */}
+      {/* ========================================== */}
+      <section ref={arkRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5 bg-[#09090d]">
+        <div className="max-w-7xl mx-auto w-full">
+          
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            
+            {/* Left Column: The Narrative & Access */}
+            <div className="lg:w-1/3 flex flex-col gap-8">
+              <div>
+                <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Ecosystem Architecture</span>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-[0.85] text-white">ARK<br/><span className="text-3xl md:text-5xl text-zinc-500">Ph.Tech</span></h2>
+              </div>
+              <p className="text-base text-zinc-300 font-light leading-relaxed">
+                ARK is not just a community; it is a meticulously scaled experiment in organizational autonomy. It acts as a massive operational engine designed to pull raw student potential and forge it into industry-ready deployment pipelines.
+              </p>
+              
+              <div className="bg-white/[0.03] border-l-2 border-red-500 p-6 my-2">
+                <p className="text-sm text-white font-bold tracking-wide italic">
+                  "I do not just build the games. I build the machine that builds the developers."
+                </p>
+              </div>
+
+              <a href="https://www.arkph.tech/" target="_blank" rel="noreferrer" className="group relative w-full flex items-center justify-between p-6 bg-[#0e0e12] border border-white/10 rounded-2xl hover:border-red-500/50 transition-all overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 w-full h-full bg-red-600/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                <div className="relative z-10 flex flex-col">
+                  <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest mb-1 block">Live Domain</span>
+                  <span className="text-white font-bold text-lg">Access Ecosystem Interface</span>
+                </div>
+                <Globe size={24} className="text-zinc-500 group-hover:text-white relative z-10 transition-colors"/>
+              </a>
+            </div>
+
+            {/* Right Column: The Core Mechanics (GlassPanels) */}
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              
+              <GlassPanel className="p-8">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-red-500"><Layers size={20}/></div>
+                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">The 8-Department Topology</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-light">
+                  Structured the ecosystem into 8 specialized nodes (Engineering, Media, Member Development, etc.). The framework allows departments to communicate and execute cross-functional tasks without the founder becoming an operational bottleneck.
+                </p>
+              </GlassPanel>
+
+              <GlassPanel className="p-8">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-amber-500"><Terminal size={20}/></div>
+                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Gamified Progression Loop</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-light">
+                  Implemented standard operating procedures structured like RPG progression. Raw first-year volunteer nodes level up through structured task completion, transforming into highly autonomous project facilitators.
+                </p>
+              </GlassPanel>
+
+              <GlassPanel className="p-8 md:col-span-2">
+                <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
+                  <div className="flex-1">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-cyan-500"><Activity size={20}/></div>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">High-Scale Asset Velocity</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed font-light max-w-xl">
+                      By stabilizing the internal architecture, ARK maintains an active pipeline of 100+ student creators. This operational velocity allows us to continuously conceptualize, build, and ship production-ready assets to national events and exhibitions seamlessly.
+                    </p>
+                  </div>
+                  
+                  {/* Internal Metrics Display inside the card */}
+                  <div className="flex md:flex-col gap-4 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 w-full md:w-auto shrink-0">
+                    <div>
+                      <span className="block text-3xl font-black text-white tracking-tighter">100+</span>
+                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Active Creators</span>
+                    </div>
+                    <div>
+                      <span className="block text-3xl font-black text-white tracking-tighter">8</span>
+                      <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Core Divisions</span>
+                    </div>
+                  </div>
+                </div>
+              </GlassPanel>
+            </div>
+          </div>
+
+          {/* ECOSYSTEM TRUST & ALIGNMENTS MOVED INTO ARK SECTION */}
+          <div className="mt-24 pt-16 border-t border-white/5 w-full">
+            <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-12 flex items-center justify-center gap-4">
+              <span className="w-12 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-12 h-[1px] bg-zinc-700"/>
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 items-center justify-items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+              {LOGOS.map((logo, i) => (
+                <div key={i} className="w-full aspect-[2/1] border border-white/5 rounded-xl flex items-center justify-center bg-black/40 hover:border-red-900/30 hover:bg-white/5 transition-colors cursor-pointer group">
+                  <span className="font-mono text-[10px] text-zinc-300 font-bold tracking-widest group-hover:text-white transition-colors text-center px-2">{logo}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
