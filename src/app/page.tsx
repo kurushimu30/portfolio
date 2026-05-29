@@ -169,8 +169,9 @@ const BADGE_TIERS = [
 ];
 
 const EVENT_COLLECTION = [
-  "/events/1.JPG", "/events/IoT.jpg", "/events/3.JPG", "/events/Unleash.jpg", 
-  "/events/PBW_volunteer.jpg", "/events/6.JPG", "/events/TechCareer.JPG"
+  "/events/1.JPG","/events/2.JPG", "/events/IoT.jpg", "/events/3.JPG", "/events/4.JPG", "/events/5.JPG", "/events/Unleash.jpg", 
+  "/events/PBW_volunteer.jpg", "/events/6.JPG", "/events/7.JPG", "/events/8.png", "/events/9.jpg","/events/10.jpg","/events/11.jpg", "/events/TechCareer.JPG",
+  "/events/12.JPG", "/events/13.JPG",
 ];
 
 const SYSTEM_AUDIT = [
@@ -786,16 +787,19 @@ export default function SovereignCharacterPortfolio() {
 
           {/* THE EVENT COLLECTION INFINITE SCROLL */}
           <div className="mt-40 w-full text-left relative z-10">
-             <span className="text-[10px] font-mono text-zinc-400 tracking-[0.2em] uppercase mb-4 block pl-4 border-l border-zinc-700">// Raw Operational Field Data Stream</span>
-             <div className="w-full overflow-hidden border-y border-white/5 bg-black/40 py-6 backdrop-blur-sm relative">
-                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
+             <span className="text-xs font-mono text-zinc-400 tracking-[0.2em] uppercase mb-6 block pl-4 border-l-2 border-zinc-700">// Raw Operational Field Data Stream</span>
+             <div className="w-full overflow-hidden border-y border-white/5 bg-black/40 py-10 backdrop-blur-sm relative">
+                {/* Widened gradient edge masks to accommodate larger images */}
+                <div className="absolute inset-y-0 left-0 w-32 md:w-48 bg-gradient-to-r from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-32 md:w-48 bg-gradient-to-l from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
                 
-                <motion.div animate={{ x: [0, -2000] }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="flex gap-4 w-max">
-                   {[...EVENT_COLLECTION, ...EVENT_COLLECTION].map((imgSrc, i) => (
-                     <div key={i} className="w-64 aspect-video rounded-xl overflow-hidden border border-white/10 shrink-0 filter grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 relative group">
+                {/* Dynamically scales animation distance based on the flex container width */}
+                <motion.div animate={{ x: ["0%", "-10%"] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 w-max">
+                   {/* Quadrupled the array to ensure a flawless -50% infinite loop */}
+                   {[...EVENT_COLLECTION, ...EVENT_COLLECTION, ...EVENT_COLLECTION, ...EVENT_COLLECTION].map((imgSrc, i) => (
+                     <div key={i} className="w-80 md:w-96 lg:w-[450px] aspect-video rounded-2xl overflow-hidden border border-white/10 shrink-0 filter grayscale opacity-40 hover:grayscale-0 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 relative group shadow-2xl">
                         <img src={imgSrc} alt="Field Operation" className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 border-2 border-red-500/0 group-hover:border-red-500/50 transition-colors rounded-xl z-10" />
+                        <div className="absolute inset-0 border-2 border-red-500/0 group-hover:border-red-500/60 transition-colors rounded-2xl z-10 shadow-[inset_0_0_20px_rgba(220,38,38,0)] group-hover:shadow-[inset_0_0_20px_rgba(220,38,38,0.3)]" />
                      </div>
                    ))}
                 </motion.div>
