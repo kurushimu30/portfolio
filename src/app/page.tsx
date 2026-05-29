@@ -372,7 +372,9 @@ export default function SovereignCharacterPortfolio() {
             <GlassPanel borderLabel="ID.CARD" className="p-8 h-1/3 flex flex-col justify-center">
                <span className="inline-block px-3 py-1 bg-red-950/40 text-red-400 w-fit rounded-full text-[9px] font-mono uppercase tracking-widest mb-4 border border-red-900/30 shadow-[0_0_10px_rgba(220,38,38,0.2)]">Founder / CEO ARK</span>
                <h2 className="text-2xl font-bold tracking-tight mb-1">Mel Carl A. Chacon</h2>
-               <p className="text-[10px] text-zinc-400 font-mono uppercase tracking-widest">Class: Systems Engineer // BSIT 2-1</p>
+               <p className="text-[10px] text-zinc-400 font-mono uppercase tracking-widest">Class: Systems Engineer // BSIT 2-1
+                Bachelor of Science in Information Technology
+               </p>
             </GlassPanel>
 
             <GlassPanel borderLabel="METRIC.DATA" className="p-8 h-1/3 flex flex-col justify-center bg-gradient-to-br from-red-950/20 to-transparent">
@@ -391,8 +393,10 @@ export default function SovereignCharacterPortfolio() {
               <h3 className="text-sm font-mono text-zinc-300 uppercase tracking-widest mb-4">Mastered Skill Passives</h3>
               <ul className="text-xs text-zinc-200 font-medium space-y-3">
                 <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Systemic SOP Framework Architecture</li>
-                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> High-Income SaaS & Devlog Video Editing</li>
                 <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Gamified Organization Task Pipelines</li>
+                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Decentralized Talent Incubator Architecture</li>
+                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Elite-Level Academic & Operational Multitasking</li>
+                <li className="flex items-start gap-2"><Crosshair size={12} className="text-red-500 mt-0.5 shrink-0"/> Sovereign Community Asset Pipeline Engineering</li>
               </ul>
             </GlassPanel>
           </div>
@@ -431,34 +435,40 @@ export default function SovereignCharacterPortfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
             <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
-                   <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                   <span className="text-red-500 font-mono text-[10px] tracking-[0.3em] uppercase">ACT I // The Sandbox</span>
+                   <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
+                   <span className="text-red-500 font-mono text-lg md:text-xl tracking-[0.3em] uppercase font-bold">ACT I // The Sandbox</span>
                 </div>
-                <p className="text-xl font-serif italic text-white leading-relaxed">
+                <p className="text-xl md:text-2xl font-serif italic text-white leading-relaxed">
                   What am I? A founder? A visionary? A student? An ambitious builder who desperately wants to do it all?
                 </p>
-                <p className="text-white font-bold bg-white/[0.03] border-l-2 border-red-500 pl-4 py-2 my-4 text-sm tracking-wide">
+                <p className="text-zinc-200 font-bold bg-white/[0.03] border-l-2 border-red-500 pl-4 py-3 my-6 text-base tracking-wide">
                   None of it matters if you cannot execute.
                 </p>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
+                <p className="text-base text-zinc-400 leading-relaxed font-light">
                   I am Mel Carl A. Chacon, 19. Built not by time, but by circumstances. My fuel is obsession.
                 </p>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                  I always hated how the world operates. The baseline surroundings felt suffocating. But I possessed imagination&mdash;the exact kind of domain where you code a world inside a sandbox and you become the creator. An Architect. Not designing physical concrete buildings, but engineering absolute systems to force my goals into reality. That is who I am. My specialization is passion.
+                <p className="text-base text-zinc-400 leading-relaxed font-light">
+                  I always hated how the world operates. The baseline surroundings felt suffocating. But I possessed imagination; the exact kind of domain where you code a world inside a sandbox and you become the creator. An Architect. Not designing physical concrete buildings, but engineering absolute systems to force my goals into reality. That is who I am. My specialization is passion.
                 </p>
             </div>
             
-            <div className="space-y-6">
-                <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
-                   <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                   <span className="text-red-500 font-mono text-[10px] tracking-[0.3em] uppercase">ACT II // Illusion of Separation</span>
+            <div className="space-y-6 flex flex-col justify-between">
+                <div className="space-y-6">
+                    <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
+                       <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
+                       <span className="text-red-500 font-mono text-lg md:text-xl tracking-[0.3em] uppercase font-bold">ACT II // Illusion of Separation</span>
+                    </div>
+                    <p className="text-base text-zinc-400 leading-relaxed font-light">
+                      It began with a low-end device. As a kid, I saw a digital world, stepped inside, and became completely immersed. Then curiosity piqued: What if I turn my own reality into a game? How realistic, how enjoyable, how unyielding can I engineer it?
+                    </p>
                 </div>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                  It began with a low-end device. As a kid, I saw a digital world, stepped inside, and became completely immersed. Then curiosity piqued: What if I turn my own reality into a game? How realistic, how enjoyable, how unyielding can I engineer it?
-                </p>
-                <p className="text-lg font-bold text-white tracking-tight mt-6">
-                  Fast forward to university.
-                </p>
+                
+                <div className="pt-12 md:pt-24">
+                    <p className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none uppercase">
+                      Fast forward <br />
+                      to university.
+                    </p>
+                </div>
             </div>
         </div>
       </section>
