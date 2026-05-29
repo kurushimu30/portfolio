@@ -1,22 +1,36 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Target, Terminal, Activity, Hexagon, Crosshair, Layers, Play, Award, Shield, Code, Cpu, ChevronRight, Briefcase, Sparkles, Swords, Check, Mail, Phone, MapPin, ArrowUpRight, Globe } from 'lucide-react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Target, Terminal, Activity, Hexagon, Crosshair, Layers, Award, Shield, Code, Cpu, Briefcase, Sparkles, Swords, Check, Mail, Phone, MapPin, ArrowUpRight, Globe, Database, Gamepad2, Cloud, GitMerge } from 'lucide-react';
 import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa';
 
-// --- DATA LAYER ---
-const LOGOS = ["DATACAMP", "AWS CLOUD CLUB", "DEVCON", "YGG PLAY SUMMIT", "PBW", "AFK", "GADGETS MAGAZINE"];
+// --- ANIMATION WRAPPER ---
+const FadeIn = ({ children, delay = 0, className = "", direction = "up" }: { children: React.ReactNode, delay?: number, className?: string, direction?: "up" | "left" | "right" | "none" }) => {
+  const y = direction === "up" ? 40 : 0;
+  const x = direction === "left" ? 40 : direction === "right" ? -40 : 0;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y, x }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
+// --- DATA LAYER ---
 const PROJECTS_ARK = [
   {
     category: "Flagship Deployment",
     title: "Code White",
     subtitle: "/ The Observer",
     impact: "Psychological Analog Horror",
-    // We treat the logo as the grand visual rather than a thumbnail
     image: "/events/CodeWhite.png", 
-    imageScaling: "w-[75%] h-[75%] object-contain drop-shadow-2xl", // Special constraint for the logo
+    imageScaling: "w-[75%] h-[75%] object-contain drop-shadow-2xl", 
     lore: "Architected representing the ARK guild on the national stage at PGDX, engineered as a flagship demonstration of systemic, suspenseful analog framework architecture.",
     buffs: ["+ National Exhibition", "+ Analog Horror Mech", "+ Game Systems Design"]
   },
@@ -25,7 +39,6 @@ const PROJECTS_ARK = [
     title: "Thynkora AI",
     subtitle: "Web3/AI Sovereign Systems",
     image: "/events/thynkora_dashboard.png",
-    // Dashboard scales edge-to-edge to fill the bento box
     imageScaling: "absolute inset-0 w-full h-full object-cover object-top filter contrast-[1.05]",
     lore: "World Hackathon Finals deployment for ICP Hub. Engineered sovereign Next.js and Motoko smart contracts bridging decentralized Web2 interfaces to Web3 blockchain infrastructure.",
     buffs: ["+ Web3 Architecture", "+ Sovereign Engineering", "+ High-Pressure Execution"],
@@ -47,7 +60,6 @@ const PROJECTS_ARK = [
     title: "BSIT Portal",
     subtitle: "中央 Institutional Digitization (May 2026)",
     image: "/events/DIT.png",
-    // Portal screenshot scales edge-to-edge, flush with card edges
     imageScaling: "absolute inset-0 w-full h-full object-cover object-top filter brightness-90 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-700",
     lore: "Architected a centralized web ecosystem to digitize institutional data submission directly for the Department Chairperson.",
     buffs: ["+ Institutional Trust", "+ Cognitive Bandwidth", "+ Systems Design"]
@@ -220,27 +232,6 @@ const EVENT_COLLECTION = [
   "/events/12.JPG", "/events/13.JPG",
 ];
 
-const SYSTEM_AUDIT = [
-  {
-    category: "Architecture & Scale",
-    title: "The 8-Department Framework",
-    desc: "Scaled operations into a multi-disciplinary network managing over 100+ active student developer pipelines.",
-    link: "https://www.facebook.com/ark.academitech2025",
-  },
-  {
-    category: "Guild Deployments",
-    title: "DEVCON Finals & PGDX",
-    desc: "Orchestrated competitive deployments: 'Bangungot' and 'Checkmate'. Engineering 'Code White' for PGDX.",
-    link: "https://leeprince.itch.io/bangungot",
-  },
-  {
-    category: "Sovereign Engineering",
-    title: "Thynkora AI & Web3",
-    desc: "World Hackathon Finals (ICP) & Base Build. Next.js and Motoko smart contracts bridging Web2 to Web3.",
-    link: "https://github.com/AcademiTechResearchAndKnowledge/Thynkora-AI",
-  }
-];
-
 const SKILLS = [
   { category: "Infrastructure & Systems", tags: ["SOP Design", "Gamified HR Routing", "Pipeline Tasking", "Notion/Trello Architecture"] },
   { category: "Media Production", tags: ["AE Performance Editing", "Technical Devlogs", "Graphic Design Architecture", "Cinematic Trailers"] },
@@ -296,7 +287,6 @@ const InteractiveBadgeCard = ({ badge, onClick }: { badge: any, onClick: () => v
       />
       <div className="absolute inset-0 border border-white/10 rounded-[20px] z-10 transition-colors duration-500 group-hover:border-transparent" />
 
-      {/* Increased padding (p-6 instead of p-5) for a bigger internal footprint */}
       <div className="bg-[#0e0e12] w-full h-full rounded-[18px] p-6 flex flex-col items-center text-center relative z-20 overflow-hidden">
         <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-zinc-500" />
         <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-zinc-500" />
@@ -309,19 +299,15 @@ const InteractiveBadgeCard = ({ badge, onClick }: { badge: any, onClick: () => v
           style={{ background: `radial-gradient(circle at center, ${getGlowColor(badge.rarity)}, transparent 70%)` }}
         />
         
-        {/* Enlarged image container (w-20/h-20 instead of 72px, and larger on md screens) */}
         <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border border-white/10 mb-5 relative z-30 bg-black shadow-inner shrink-0">
           <img src={badge.logoImg} alt={badge.org} className="w-full h-full object-cover filter brightness-[0.85] group-hover:brightness-100 transition-all group-hover:scale-110 duration-500" />
         </div>
         
         <div className="z-30 w-full flex flex-col items-center flex-1">
-          {/* Increased badge label text size and padding */}
           <span className={`text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded border mb-3 inline-block shadow-sm bg-[#0e0e12] ${badge.rarityColor}`}>
             {badge.rarity}
           </span>
-          {/* Increased role text size */}
           <h4 className="text-base md:text-lg font-bold tracking-tight text-white line-clamp-2 px-1 leading-snug mb-2">{badge.role}</h4>
-          {/* Increased org text size */}
           <p className="text-xs text-zinc-400 mt-auto w-full line-clamp-2">{badge.org}</p>
         </div>
       </div>
@@ -335,7 +321,6 @@ export default function SovereignCharacterPortfolio() {
   const reconRef = useRef<any>(null);
   const projectsRef = useRef<any>(null);
   const recordsRef = useRef<any>(null);
-  const dataLogsRef = useRef<any>(null);
   const arkRef = useRef<any>(null);
   const contactRef = useRef<any>(null);
 
@@ -381,19 +366,29 @@ export default function SovereignCharacterPortfolio() {
         className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300 hidden md:block"
         animate={{ background: `radial-gradient(600px circle at ${globalMousePos.x}px ${globalMousePos.y}px, rgba(220, 38, 38, 0.03), transparent 80%)` }}
       />
-      <div className="fixed inset-0 pointer-events-none z-0 hidden lg:block opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <motion.path d="M 0 200 L 300 200 L 400 600 L 1000 600" fill="transparent" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="5,5" />
-          <motion.circle cx="300" cy="200" r="3" fill="#dc2626" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 2, repeat: Infinity }} />
-          <motion.circle cx="400" cy="600" r="3" fill="#dc2626" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 2, delay: 1, repeat: Infinity }} />
-          <motion.path d="M 1400 100 L 1200 100 L 1100 800 L 1500 800" fill="transparent" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="5,5" />
-        </svg>
-      </div>
       
-      {/* MOVED CIRCUIT TO THE RIGHT SIDE */}
-      <div className="fixed right-4 md:right-12 top-0 bottom-0 w-[1px] bg-white/5 z-0 hidden md:block pointer-events-none">
-        <motion.div style={{ scaleY: circuitProgress }} className="w-full h-full bg-red-600 origin-top shadow-[0_0_15px_#dc2626]" />
-        <motion.div style={{ top: useTransform(circuitProgress, [0, 1], ["0%", "100%"]) }} className="absolute left-1/2 -translate-x-1/2 w-2 h-4 bg-white rounded-full shadow-[0_0_10px_#ffffff]" />
+      {/* SNAKING CIRCUIT LINE TRACING SCROLL */}
+      <div className="fixed inset-0 pointer-events-none z-0 hidden lg:block opacity-30">
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {/* Base Track */}
+          <path 
+            d="M 95 0 V 15 H 10 V 30 H 90 V 50 H 5 V 65 H 90 V 85 H 50 V 100" 
+            fill="none" 
+            stroke="rgba(255,255,255,0.05)" 
+            strokeWidth="0.5" 
+            vectorEffect="non-scaling-stroke" 
+          />
+          {/* Animated Red Laser */}
+          <motion.path 
+            d="M 95 0 V 15 H 10 V 30 H 90 V 50 H 5 V 65 H 90 V 85 H 50 V 100" 
+            fill="none" 
+            stroke="#dc2626" 
+            strokeWidth="1.5" 
+            vectorEffect="non-scaling-stroke" 
+            style={{ pathLength: circuitProgress }}
+            className="drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]"
+          />
+        </svg>
       </div>
 
       {/* ========================================== */}
@@ -409,12 +404,10 @@ export default function SovereignCharacterPortfolio() {
           </button>
           <div className="w-3 h-[1px] bg-white/10" />
           
-          {/* Synchronized Icons */}
           <button onClick={() => scrollTo(recordsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Passives"><Briefcase size={16}/></button>
           <button onClick={() => scrollTo(reconRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Recon"><Swords size={16}/></button>
           <button onClick={() => scrollTo(projectsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Architecture"><Layers size={16}/></button>
           <button onClick={() => scrollTo(arkRef)} className="text-white/40 hover:text-red-500 transition-colors" title="ARK Ecosystem"><Globe size={16}/></button>
-          <button onClick={() => scrollTo(dataLogsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Audit"><Activity size={16}/></button>
           <div className="w-3 h-[1px] bg-white/10" />
           <button onClick={() => scrollTo(contactRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Contact"><Mail size={16}/></button>
         </div>
@@ -426,7 +419,7 @@ export default function SovereignCharacterPortfolio() {
       <section ref={heroRef} className="relative min-h-screen w-full flex items-center justify-center p-4 md:px-24 overflow-hidden z-20 snap-start">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[70vh] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-600/10 via-transparent to-transparent blur-[100px] pointer-events-none z-0" />
         
-        <div className="relative z-10 w-full max-w-[1400px] h-[85vh] min-h-[680px] bg-[#0b0b0f]/60 backdrop-blur-3xl border border-white/10 rounded-[40px] p-4 flex flex-col md:flex-row gap-4 shadow-2xl">
+        <FadeIn className="relative z-10 w-full max-w-[1400px] h-[85vh] min-h-[680px] bg-[#0b0b0f]/60 backdrop-blur-3xl border border-white/10 rounded-[40px] p-4 flex flex-col md:flex-row gap-4 shadow-2xl">
           
             <div className={`hidden md:flex w-20 bg-white/[0.02] rounded-[32px] border border-white/5 flex-col items-center py-8 justify-between transition-opacity duration-300 ${showHud ? 'opacity-0' : 'opacity-100'}`}>
             <div className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.05)]">
@@ -439,7 +432,6 @@ export default function SovereignCharacterPortfolio() {
                 <button onClick={() => scrollTo(reconRef)} title="Recon" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Swords size={22} /></button>
                 <button onClick={() => scrollTo(projectsRef)} title="Architecture" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Layers size={22} /></button>
                 <button onClick={() => scrollTo(arkRef)} title="ARK Ecosystem" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Globe size={22} /></button>
-                <button onClick={() => scrollTo(dataLogsRef)} title="Audit" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Activity size={22} /></button>
               </div>
               <div className="w-6 h-[1px] bg-white/10" />
               <div className="flex flex-col gap-6">
@@ -499,7 +491,7 @@ export default function SovereignCharacterPortfolio() {
               </ul>
             </GlassPanel>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* ========================================== */}
@@ -536,7 +528,7 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       <section className="min-h-screen w-full flex items-center justify-center py-24 px-6 md:px-24 relative z-20 snap-start">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-            <div className="space-y-6">
+            <FadeIn className="space-y-6" direction="left">
                 <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
                    <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
                    <span className="text-red-500 font-mono text-lg md:text-xl tracking-[0.3em] uppercase font-bold">ACT I // The Sandbox</span>
@@ -553,9 +545,9 @@ export default function SovereignCharacterPortfolio() {
                 <p className="text-base text-zinc-400 leading-relaxed font-light">
                   I always hated how the world operates. The baseline surroundings felt suffocating. But I possessed imagination; the exact kind of domain where you code a world inside a sandbox and you become the creator. An Architect. Not designing physical concrete buildings, but engineering absolute systems to force my goals into reality. That is who I am. My specialization is passion.
                 </p>
-            </div>
+            </FadeIn>
             
-            <div className="space-y-6 flex flex-col justify-between">
+            <FadeIn className="space-y-6 flex flex-col justify-between" direction="right" delay={0.2}>
                 <div className="space-y-6">
                     <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
                        <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
@@ -572,7 +564,7 @@ export default function SovereignCharacterPortfolio() {
                       to university.
                     </p>
                 </div>
-            </div>
+            </FadeIn>
         </div>
       </section>
 
@@ -582,19 +574,19 @@ export default function SovereignCharacterPortfolio() {
       <section ref={recordsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/80 border-y border-white/5 relative z-20 backdrop-blur-sm snap-start">
         <div className="max-w-7xl mx-auto w-full">
           
-          <div className="mb-16 text-center relative">
+          <FadeIn className="mb-16 text-center relative">
             <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Verified Competition Records</span>
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">Character Passives.</h2>
             <p className="text-sm text-zinc-300 font-medium leading-relaxed mx-auto max-w-2xl">
               A comprehensive ledger of elite academic standards, world-stage hackathon deployments, and systemic capabilities. Every passive here acts as a permanent multiplier to the ecosystem's baseline velocity.
             </p>
-          </div>
+          </FadeIn>
             
           {/* HIGHLIGHTED ACHIEVEMENTS GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24 relative z-10">
             
             {/* FEATURED: WORLD HACKATHON FINALIST */}
-            <div className="group relative rounded-[24px] p-[2px] col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden shadow-[0_0_40px_rgba(245,158,11,0.15)] cursor-default">
+            <FadeIn className="group relative rounded-[24px] p-[2px] col-span-1 md:col-span-2 lg:col-span-3 overflow-hidden shadow-[0_0_40px_rgba(245,158,11,0.15)] cursor-default">
               <div 
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none"
                 style={{ background: `conic-gradient(from 0deg, transparent 0%, #f59e0b 30%, transparent 50%)` }}
@@ -633,11 +625,11 @@ export default function SovereignCharacterPortfolio() {
                    </a>
                  </div>
               </div>
-            </div>
+            </FadeIn>
 
-            {/* REGULAR ACCOLADES (Recon Style Cards with Lore) */}
+            {/* REGULAR ACCOLADES */}
             {REGULAR_ACCOLADES.map((item, i) => (
-              <div key={i} className="group relative rounded-[20px] p-[2px] overflow-hidden cursor-default shadow-lg flex flex-col">
+              <FadeIn key={i} delay={i * 0.1} className="group relative rounded-[20px] p-[2px] overflow-hidden cursor-default shadow-lg flex flex-col">
                 <div 
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-500 z-0 pointer-events-none" 
                   style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }} 
@@ -670,23 +662,23 @@ export default function SovereignCharacterPortfolio() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
 
           {/* CAPABILITY MATRICES */}
           <div className="relative z-10">
-            <div className="flex items-center justify-center gap-4 mb-10">
+            <FadeIn className="flex items-center justify-center gap-4 mb-10">
               <span className="w-16 h-[1px] bg-red-500/30" />
               <h3 className="text-sm font-mono text-white/60 uppercase tracking-widest flex items-center gap-2">
                 <Layers size={14} className="text-red-500"/> Core Capability Matrices
               </h3>
               <span className="w-16 h-[1px] bg-red-500/30" />
-            </div>
+            </FadeIn>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {SKILLS.map((skill, i) => (
-                <div key={i} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl">
+                <FadeIn key={i} delay={i * 0.15} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl">
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-red-500/10 transition-colors duration-500" />
                   
                   <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
@@ -705,7 +697,7 @@ export default function SovereignCharacterPortfolio() {
                       ))}
                     </ul>
                   </div>
-                </div>
+                </FadeIn>
               ))}
             </div>
           </div>
@@ -718,18 +710,20 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       <section className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start">
         <div className="max-w-5xl mx-auto w-full text-center">
-          <span className="text-red-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-6 block">ACT III // The Target Coordinates</span>
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-10 text-white">The Mission Framework</h2>
+          <FadeIn>
+            <span className="text-red-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-6 block">ACT III // The Target Coordinates</span>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-10 text-white">The Mission Framework</h2>
+          </FadeIn>
           
-          <div className="text-white font-medium border border-white/10 rounded-2xl p-6 md:p-8 bg-[#111116]/80 backdrop-blur-md shadow-2xl text-left mx-auto max-w-3xl mb-10 relative overflow-hidden">
+          <FadeIn delay={0.2} className="text-white font-medium border border-white/10 rounded-2xl p-6 md:p-8 bg-[#111116]/80 backdrop-blur-md shadow-2xl text-left mx-auto max-w-3xl mb-10 relative overflow-hidden">
              <div className="absolute top-0 left-0 w-1 h-full bg-red-600" />
              <p className="text-sm md:text-base leading-relaxed tracking-wide">
                 <span className="font-bold text-red-500 mr-2">THE MISSION:</span> 
                 To construct the leading independent, student-led Game Developer Studio and Startup Incubator in the Philippines. Why? Why not? If you are going to aim for a coordinate, aim for the stars.
              </p>
-          </div>
+          </FadeIn>
 
-          <div className="space-y-6 max-w-2xl mx-auto text-left">
+          <FadeIn delay={0.4} className="space-y-6 max-w-2xl mx-auto text-left">
              <p className="text-sm text-zinc-400 leading-relaxed font-light">
                At first, I was naive. Scared. A fresh node stepping into an uncharted environment. I thought I was prepared, but that baseline security was an illusion. My vision was simply too massive for the default environment to accommodate.
              </p>
@@ -739,7 +733,7 @@ export default function SovereignCharacterPortfolio() {
              <p className="text-sm text-white leading-relaxed font-medium italic mt-8 border-t border-white/5 pt-8">
                &ldquo;I beg to differ. A man who follows the crowd will get no further than the crowd. The man who walks alone is bound to find himself in places no one has ever stepped before.&rdquo;
              </p>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -749,21 +743,21 @@ export default function SovereignCharacterPortfolio() {
       <section ref={reconRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 relative z-20 border-t border-white/5 snap-start">
         <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10 w-full">
           
-          <div className="mb-20 text-center relative w-full max-w-2xl">
+          <FadeIn className="mb-20 text-center relative w-full max-w-2xl">
             <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Achievement Book</span>
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">Strategic Reconnaissance.</h2>
             <p className="text-sm text-zinc-300 font-medium leading-relaxed mx-auto">
               Every position held across the Philippine tech landscape was an active deployment to harvest system metrics. Click an item card to audit the full badge record layout.
             </p>
-          </div>
+          </FadeIn>
 
           {/* THE HIERARCHICAL PYRAMID MATRIX */}
           <div className="flex flex-col items-center gap-6 md:gap-8 w-full max-w-[900px] relative">
             <div className="absolute top-20 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-red-600/50 via-white/10 to-transparent -z-10" />
 
-            {BADGE_TIERS.map((tier) => (
+            {BADGE_TIERS.map((tier, tierIdx) => (
               tier.items.length > 0 && (
-                <div key={tier.id} className="flex flex-col items-center w-full relative">
+                <FadeIn key={tier.id} delay={tierIdx * 0.15} className="flex flex-col items-center w-full relative">
                   <div className="flex flex-wrap justify-center gap-4 md:gap-6 w-full">
                     {tier.items.map((badge, i) => (
                       <div key={i} className="w-[160px] sm:w-[190px] md:w-[220px] min-h-[220px]">
@@ -771,12 +765,12 @@ export default function SovereignCharacterPortfolio() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </FadeIn>
               )
             ))}
           </div>
 
-          {/* DYNAMIC LIGHTBOX OVERLAY FOR BADGE PROFILE INSPECTOR */}
+          {/* DYNAMIC LIGHTBOX OVERLAY */}
           <AnimatePresence>
             {activeBadge && (
               <motion.div 
@@ -832,29 +826,26 @@ export default function SovereignCharacterPortfolio() {
           </AnimatePresence>
 
           {/* THE EVENT COLLECTION INFINITE SCROLL */}
-          <div className="mt-40 w-full text-left relative z-10">
+          <FadeIn className="mt-40 w-full text-left relative z-10">
              <span className="text-xs font-mono text-zinc-400 tracking-[0.2em] uppercase mb-6 block pl-4 border-l-2 border-zinc-700">// Raw Operational Field Data Stream</span>
              <div className="w-full overflow-hidden border-y border-white/5 bg-black/40 py-10 backdrop-blur-sm relative">
-                {/* Widened gradient edge masks to accommodate larger images */}
                 <div className="absolute inset-y-0 left-0 w-32 md:w-48 bg-gradient-to-r from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-y-0 right-0 w-32 md:w-48 bg-gradient-to-l from-[#0b0b0f] to-transparent z-10 pointer-events-none" />
                 
-                {/* Dynamically scales animation distance based on the flex container width */}
                 <motion.div animate={{ x: ["0%", "-10%"] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 w-max">
-                   {/* Quadrupled the array to ensure a flawless -50% infinite loop */}
                    {[...EVENT_COLLECTION, ...EVENT_COLLECTION, ...EVENT_COLLECTION, ...EVENT_COLLECTION].map((imgSrc, i) => (
-                     <div key={i} className="w-80 md:w-96 lg:w-[450px] aspect-video rounded-2xl overflow-hidden border border-white/10 shrink-0 filter grayscale opacity-40 hover:grayscale-0 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 relative group shadow-2xl">
+                     <div key={i} className="w-80 md:w-96 lg:w-[450px] aspect-video rounded-2xl overflow-hidden border border-white/10 shrink-0 hover:scale-[1.02] transition-all duration-500 relative group shadow-2xl">
                         <img src={imgSrc} alt="Field Operation" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 border-2 border-red-500/0 group-hover:border-red-500/60 transition-colors rounded-2xl z-10 shadow-[inset_0_0_20px_rgba(220,38,38,0)] group-hover:shadow-[inset_0_0_20px_rgba(220,38,38,0.3)]" />
                      </div>
                    ))}
                 </motion.div>
              </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ========================================== */}
+            {/* ========================================== */}
       {/* 05. CORE ENGINEERING (Projects Bento)      */}
       {/* ========================================== */}
       <section ref={projectsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 border-t border-white/5 relative z-20 backdrop-blur-sm snap-start">
@@ -1054,8 +1045,7 @@ export default function SovereignCharacterPortfolio() {
           </div>
         </div>
       </section>
-
-{/* ========================================== */}
+      {/* ========================================== */}
       {/* 09. NEW: ARK ECOSYSTEM BREAKDOWN           */}
       {/* ========================================== */}
       <section ref={arkRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5 bg-[#09090d]">
@@ -1065,43 +1055,37 @@ export default function SovereignCharacterPortfolio() {
             
             {/* Left Column: The Narrative, Logo & Quote */}
             <div className="w-full lg:w-1/3 flex flex-col gap-8 relative">
-              {/* Massive ambient glow behind the title */}
               <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 blur-[120px] pointer-events-none z-0" />
               
-              <div className="relative z-10">
+              <FadeIn className="relative z-10" direction="left">
                 <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block border-l-2 border-red-700 pl-3 w-fit">// Ecosystem Architecture</span>
                 <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6 leading-[0.85] text-white">ARK<br/><span className="text-3xl md:text-5xl text-zinc-500">Ph.Tech</span></h2>
-              </div>
+              </FadeIn>
               
-              {/* ARK Logo Presentation Frame */}
-              <div className="w-32 h-32 md:w-48 md:h-48 rounded-[24px] md:rounded-[32px] overflow-hidden border border-white/10 bg-black shadow-2xl relative z-10 mb-2 shrink-0 group">
+              <FadeIn delay={0.2} direction="left" className="w-32 h-32 md:w-48 md:h-48 rounded-[24px] md:rounded-[32px] overflow-hidden border border-white/10 bg-black shadow-2xl relative z-10 mb-2 shrink-0 group">
                  <img src="/ark_logo.png" alt="ARK Ecosystem Logo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
+              </FadeIn>
 
-              <p className="text-base text-zinc-300 font-light leading-relaxed relative z-10">
+              <FadeIn delay={0.3} direction="left" className="text-base text-zinc-300 font-light leading-relaxed relative z-10">
                 ARK is not just a community; it is a meticulously scaled experiment in organizational autonomy. It acts as a massive operational engine designed to pull raw student potential and forge it into industry-ready deployment pipelines.
-              </p>
+              </FadeIn>
 
-              {/* Quote - Placed directly below the description */}
-              <div className="bg-red-500/[0.03] border-l-2 border-red-500 p-6 flex items-center rounded-r-2xl shadow-lg relative z-10">
+              <FadeIn delay={0.4} direction="left" className="bg-red-500/[0.03] border-l-2 border-red-500 p-6 flex items-center rounded-r-2xl shadow-lg relative z-10">
                 <p className="text-sm md:text-base text-white font-bold tracking-wide italic leading-relaxed">
                   "I do not just build the games. I build the machine that builds the developers."
                 </p>
-              </div>
+              </FadeIn>
             </div>
 
             {/* Right Column: The Core Mechanics & Call to Action */}
             <div className="w-full lg:w-2/3 flex flex-col gap-6 relative z-10">
-              
-              {/* Spinning Ambient Background for the Mechanics Grid */}
               <div 
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-10 pointer-events-none z-0 animate-[spin_6s_linear_infinite]"
                 style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }}
               />
 
-              {/* The 3 Mechanic Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl z-10">
+                <FadeIn direction="right" delay={0.1} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-red-500/50 transition-colors shadow-xl z-10">
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-red-500/10 transition-colors duration-500" />
                   <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-red-600 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
@@ -1111,9 +1095,9 @@ export default function SovereignCharacterPortfolio() {
                       Structured the ecosystem into 8 specialized nodes (Engineering, Media, Member Development, etc.). The framework allows departments to communicate and execute cross-functional tasks without the founder becoming an operational bottleneck.
                     </p>
                   </div>
-                </div>
+                </FadeIn>
 
-                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors shadow-xl z-10">
+                <FadeIn direction="right" delay={0.2} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors shadow-xl z-10">
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-amber-500/10 transition-colors duration-500" />
                   <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col">
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
@@ -1123,9 +1107,9 @@ export default function SovereignCharacterPortfolio() {
                       Implemented standard operating procedures structured like RPG progression. Raw first-year volunteer nodes level up through structured task completion, transforming into highly autonomous project facilitators.
                     </p>
                   </div>
-                </div>
+                </FadeIn>
 
-                <div className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors shadow-xl z-10 md:col-span-2">
+                <FadeIn direction="right" delay={0.3} className="group relative rounded-[20px] p-[2px] overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors shadow-xl z-10 md:col-span-2">
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent z-10 rounded-[20px] pointer-events-none group-hover:from-cyan-500/10 transition-colors duration-500" />
                   <div className="bg-[#0b0b0f] w-full h-full rounded-[18px] p-8 relative z-20 flex flex-col md:flex-row gap-8 items-start md:items-center">
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500 to-transparent opacity-30 group-hover:opacity-100 transition-opacity" />
@@ -1138,7 +1122,6 @@ export default function SovereignCharacterPortfolio() {
                       </p>
                     </div>
                     
-                    {/* Internal Metrics Display inside the card */}
                     <div className="flex flex-row md:flex-col gap-6 md:gap-8 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-10 w-full md:w-auto shrink-0 mt-6 md:mt-0">
                       <div>
                         <span className="block text-4xl md:text-5xl font-black text-white tracking-tighter">100+</span>
@@ -1154,59 +1137,127 @@ export default function SovereignCharacterPortfolio() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </FadeIn>
               </div>
 
-              {/* Live Domain Button - Placed directly below the Velocity Card */}
-              <a href="https://www.arkph.tech/" target="_blank" rel="noreferrer" className="w-full group relative flex items-center justify-between p-6 bg-[#0e0e12] border border-red-500/20 rounded-2xl hover:border-red-500/60 transition-all overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.1)] mt-2 z-10">
-                <div className="absolute inset-0 w-full h-full bg-red-600/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                <div className="relative z-10 flex flex-col">
-                  <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest mb-1 block">Live Domain</span>
-                  <span className="text-white font-bold text-base md:text-lg">Access Ecosystem Interface</span>
-                </div>
-                <Globe size={24} className="text-red-500 group-hover:text-white relative z-10 transition-colors group-hover:animate-pulse shrink-0"/>
-              </a>
+              <FadeIn direction="right" delay={0.4}>
+                <a href="https://www.arkph.tech/" target="_blank" rel="noreferrer" className="w-full group relative flex items-center justify-between p-6 bg-[#0e0e12] border border-red-500/20 rounded-2xl hover:border-red-500/60 transition-all overflow-hidden shadow-[0_0_30px_rgba(220,38,38,0.1)] mt-2 z-10">
+                  <div className="absolute inset-0 w-full h-full bg-red-600/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                  <div className="relative z-10 flex flex-col">
+                    <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest mb-1 block">Live Domain</span>
+                    <span className="text-white font-bold text-base md:text-lg">Access Ecosystem Interface</span>
+                  </div>
+                  <Globe size={24} className="text-red-500 group-hover:text-white relative z-10 transition-colors group-hover:animate-pulse shrink-0"/>
+                </a>
+              </FadeIn>
 
             </div>
           </div>
 
-          {/* ECOSYSTEM TRUST & ALIGNMENTS */}
+          {/* ========================================== */}
+          {/* STRATEGIC INTEGRATIONS & ALIGNMENTS        */}
+          {/* ========================================== */}
           <div className="mt-32 pt-20 border-t border-white/5 w-full relative z-10">
-            <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-16 flex items-center justify-center gap-6">
-              <span className="w-16 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-16 h-[1px] bg-zinc-700"/>
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center justify-items-center opacity-50 hover:opacity-100 transition-opacity duration-500">
-              {LOGOS.map((logo, i) => (
-                <div key={i} className="w-full aspect-[2/1] border border-white/5 rounded-xl flex items-center justify-center bg-black/40 hover:border-red-900/30 hover:bg-white/5 hover:shadow-[0_0_20px_rgba(220,38,38,0.1)] transition-all cursor-pointer group">
-                  <span className="font-mono text-[10px] md:text-xs text-zinc-400 font-bold tracking-widest group-hover:text-white transition-colors text-center px-4 leading-tight">{logo}</span>
+            <FadeIn className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-16 flex items-center justify-center gap-6">
+              <span className="w-16 h-[1px] bg-zinc-700"/> Strategic Integrations <span className="w-16 h-[1px] bg-zinc-700"/>
+            </FadeIn>
+            
+            <div className="flex flex-col gap-8 relative z-10">
+              
+              <FadeIn className="w-full group relative rounded-[24px] p-[2px] overflow-hidden shadow-[0_0_30px_rgba(34,197,94,0.1)] cursor-default">
+                <div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-700 z-0 pointer-events-none"
+                  style={{ background: `conic-gradient(from 0deg, transparent 0%, #22c55e 30%, transparent 50%)` }}
+                />
+                <div className="absolute inset-0 border border-green-500/20 rounded-[24px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+                
+                <div className="bg-[#0a0a0d] relative z-20 w-full rounded-[22px] p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/5 blur-[80px] pointer-events-none z-0" />
+                   
+                   <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-green-950/30 border border-green-500/20 flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform duration-500">
+                      <Database size={40} className="text-green-500" />
+                   </div>
+
+                   <div className="flex-1 text-center md:text-left z-10">
+                     <h4 className="font-bold text-[10px] md:text-xs text-green-500 uppercase tracking-[0.3em] mb-2 font-mono">Official Tech Partner</h4>
+                     <span className="text-4xl md:text-5xl font-black text-white leading-none tracking-tight block mb-4">DataCamp</span>
+                     <p className="text-sm text-zinc-400 font-light max-w-xl mx-auto md:mx-0">
+                       Integrated into the ecosystem to provide institutional-grade data science, AI, and machine learning curriculum pipelines for core members.
+                     </p>
+                   </div>
+
+                   <div className="shrink-0 z-10">
+                      <span className="px-4 py-2 bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-mono tracking-widest uppercase rounded-full flex items-center gap-2 shadow-[inset_0_0_10px_rgba(34,197,94,0.2)]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"/> Integration Active
+                      </span>
+                   </div>
                 </div>
-              ))}
+              </FadeIn>
+
+              <div className="w-full mt-4">
+                <FadeIn className="flex items-center gap-4 mb-8">
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.2em] text-center">Community Partner Nodes</span>
+                  <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                </FadeIn>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[
+                    { name: "AFK", icon: <Gamepad2 size={24}/>, color: "hover:border-purple-500/50 hover:bg-purple-900/10 hover:text-purple-400" },
+                    { name: "Philippine Blockchain Week", icon: <Hexagon size={24}/>, color: "hover:border-blue-500/50 hover:bg-blue-900/10 hover:text-blue-400" },
+                    { name: "Arduino Day PH", icon: <Cpu size={24}/>, color: "hover:border-teal-500/50 hover:bg-teal-900/10 hover:text-teal-400" },
+                    { name: "YGG Play Summit", icon: <Swords size={24}/>, color: "hover:border-yellow-500/50 hover:bg-yellow-900/10 hover:text-yellow-400" },
+                    { name: "AWS Learning Club", desc: "TUP Manila", icon: <Cloud size={24}/>, color: "hover:border-orange-500/50 hover:bg-orange-900/10 hover:text-orange-400" },
+                    { name: "The Programmers' Guild", desc: "PUP Manila", icon: <Terminal size={24}/>, color: "hover:border-red-500/50 hover:bg-red-900/10 hover:text-red-400" },
+                    { name: "DevCon Manila", icon: <Code size={24}/>, color: "hover:border-indigo-500/50 hover:bg-indigo-900/10 hover:text-indigo-400" },
+                    { name: "Workflow PH", icon: <GitMerge size={24}/>, color: "hover:border-pink-500/50 hover:bg-pink-900/10 hover:text-pink-400" }
+                  ].map((partner, idx) => (
+                    <FadeIn key={idx} delay={idx * 0.05} className={`group relative p-8 rounded-2xl bg-[#0a0a0d] border border-white/5 flex flex-col items-center justify-center text-center transition-all duration-300 ${partner.color} shadow-lg cursor-default`}>
+                      <div className="mb-5 text-zinc-600 transition-colors duration-300 group-hover:scale-110 transform">
+                        {partner.icon}
+                      </div>
+                      <h5 className="font-bold text-sm text-zinc-200 tracking-tight group-hover:text-white transition-colors leading-tight">
+                        {partner.name}
+                      </h5>
+                      {partner.desc && (
+                        <span className="text-[9px] font-mono text-zinc-500 mt-2 tracking-widest uppercase">
+                          {partner.desc}
+                        </span>
+                      )}
+                      <div className="absolute top-0 right-0 w-8 h-8 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute top-[-16px] right-[-16px] w-8 h-8 bg-current rotate-45 opacity-20" />
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* ========================================== */}
+{/* ========================================== */}
       {/* 08. SECURE CONTACT TERMINAL                */}
       {/* ========================================== */}
-      <footer ref={contactRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/90 relative overflow-hidden border-t border-white/5 z-20 backdrop-blur-xl snap-start">
+      <footer ref={contactRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#050505] relative overflow-hidden border-t border-white/5 z-20 snap-start">
         <div className="max-w-7xl mx-auto relative w-full z-10">
           
-          <h1 className="absolute top-10 left-0 text-[18vw] font-black text-white/[0.02] leading-none tracking-tighter uppercase pointer-events-none select-none z-0 whitespace-nowrap">
+          <h1 className="absolute top-10 left-0 text-[18vw] font-black text-white/[0.015] leading-none tracking-tighter uppercase pointer-events-none select-none z-0 whitespace-nowrap">
             CONTACT
           </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 relative z-10 pt-20">
-            <div className="flex flex-col justify-start">
+            <FadeIn className="flex flex-col justify-start" direction="left">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-6">
                 <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white flex items-center gap-4">
                   Reach out <ArrowUpRight className="text-white" size={48} strokeWidth={3}/>
                 </h2>
                 <div className="flex gap-3">
-                  <a href="#" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaTwitter size={18}/></a>
-                  <a href="https://www.facebook.com/akumahonoyami" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaFacebook size={18}/></a>
-                  <a href="https://www.instagram.com/kuru.3437/" className="w-12 h-12 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all shadow-lg"><FaInstagram size={18}/></a>
+                  <a href="#" className="w-12 h-12 rounded-xl bg-[#0a0a0d] border border-white/10 flex items-center justify-center text-zinc-500 hover:text-red-400 hover:border-red-500/30 hover:bg-red-950/20 transition-all shadow-lg"><FaTwitter size={18}/></a>
+                  <a href="https://www.facebook.com/akumahonoyami" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-[#0a0a0d] border border-white/10 flex items-center justify-center text-zinc-500 hover:text-red-400 hover:border-red-500/30 hover:bg-red-950/20 transition-all shadow-lg"><FaFacebook size={18}/></a>
+                  <a href="https://www.instagram.com/kuru.3437/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-[#0a0a0d] border border-white/10 flex items-center justify-center text-zinc-500 hover:text-red-400 hover:border-red-500/30 hover:bg-red-950/20 transition-all shadow-lg"><FaInstagram size={18}/></a>
                 </div>
               </div>
 
@@ -1228,42 +1279,90 @@ export default function SovereignCharacterPortfolio() {
                   Direct Access: Skip the layers—you are communicating directly with the founder.
                 </li>
               </ul>
-            </div>
+            </FadeIn>
 
-            <div className="bg-[#111116] border border-white/5 rounded-[32px] p-6 shadow-2xl backdrop-blur-xl">
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <input type="text" placeholder="Name" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-colors w-full shadow-inner" />
-                  <input type="email" placeholder="Email" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-colors w-full shadow-inner" />
-               </div>
-               <textarea placeholder="Message" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-colors w-full h-48 resize-none shadow-inner mb-4"></textarea>
-               <button className="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-zinc-200 transition-colors shadow-lg">Submit</button>
-            </div>
+            {/* HIGH-TECH CONTACT FORM */}
+            <FadeIn className="group relative rounded-[32px] p-[2px] overflow-hidden shadow-[0_0_40px_rgba(220,38,38,0.1)] cursor-default h-fit" direction="right">
+              {/* Spinning Glow Border */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 group-hover:opacity-100 group-hover:animate-[spin_4s_linear_infinite] transition-opacity duration-700 z-0 pointer-events-none"
+                style={{ background: `conic-gradient(from 0deg, transparent 0%, #ef4444 30%, transparent 50%)` }}
+              />
+              <div className="absolute inset-0 border border-red-500/20 rounded-[32px] z-10 transition-colors duration-500 group-hover:border-transparent" />
+              
+              <div className="bg-[#0a0a0d] relative z-20 w-full rounded-[30px] p-8 md:p-10 flex flex-col shadow-2xl">
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 blur-[80px] pointer-events-none z-0" />
+                 
+                 <div className="relative z-10">
+                   <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
+                      <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
+                      <span className="text-red-500 font-mono text-xs tracking-[0.2em] uppercase font-bold">Initialize Secure Connection</span>
+                   </div>
+
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <input type="text" placeholder="Designation (Name)" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm font-mono text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:bg-red-500/5 transition-colors w-full shadow-inner" />
+                      <input type="email" placeholder="Comms Link (Email)" className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm font-mono text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:bg-red-500/5 transition-colors w-full shadow-inner" />
+                   </div>
+                   <textarea placeholder="Transmit Query / Proposal..." className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm font-mono text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:bg-red-500/5 transition-colors w-full h-40 resize-none shadow-inner mb-6"></textarea>
+                   
+                   <button className="w-full bg-red-600/10 border border-red-500/30 text-red-500 font-mono font-bold uppercase tracking-[0.2em] py-4 rounded-2xl hover:bg-red-600 hover:text-white transition-all shadow-[0_0_20px_rgba(220,38,38,0.1)] hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] flex items-center justify-center gap-3">
+                     Transmit Data <ArrowUpRight size={18} />
+                   </button>
+                 </div>
+              </div>
+            </FadeIn>
           </div>
 
+          {/* CONTACT INFO NODES */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-            <GlassPanel className="p-8">
-              <Mail className="text-zinc-400 mb-6" size={24}/>
-              <h4 className="text-white font-bold mb-2">Email Me</h4>
-              <p className="text-sm text-zinc-500 font-light">melcarl.chacon@gmail.com</p>
-            </GlassPanel>
-            <GlassPanel className="p-8">
-              <Phone className="text-zinc-400 mb-6" size={24}/>
-              <h4 className="text-white font-bold mb-2">Call us</h4>
-              <p className="text-sm text-zinc-500 font-light">+63 (9936907577)</p>
-            </GlassPanel>
-            <GlassPanel className="p-8">
-              <MapPin className="text-zinc-400 mb-6" size={24}/>
-              <h4 className="text-white font-bold mb-2">Network & Operations</h4>
-              <p className="text-sm text-zinc-500 font-light">Manila, Philippines</p>
-            </GlassPanel>
+            <FadeIn delay={0.1}>
+              <div className="group relative p-8 rounded-2xl bg-[#0a0a0d] border border-white/5 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/10 shadow-lg cursor-default h-full">
+                <div className="mb-5 text-zinc-600 transition-colors duration-300 group-hover:text-red-500 group-hover:scale-110 transform">
+                  <Mail size={28}/>
+                </div>
+                <h4 className="text-white font-bold mb-2 tracking-tight">Direct Comms</h4>
+                <p className="text-sm text-zinc-500 font-mono tracking-wide">melcarl.chacon@gmail.com</p>
+                <div className="absolute top-0 right-0 w-8 h-8 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-[-16px] right-[-16px] w-8 h-8 bg-red-500 rotate-45 opacity-20" />
+                </div>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.2}>
+              <div className="group relative p-8 rounded-2xl bg-[#0a0a0d] border border-white/5 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/10 shadow-lg cursor-default h-full">
+                <div className="mb-5 text-zinc-600 transition-colors duration-300 group-hover:text-red-500 group-hover:scale-110 transform">
+                  <Phone size={28}/>
+                </div>
+                <h4 className="text-white font-bold mb-2 tracking-tight">Voice Channel</h4>
+                <p className="text-sm text-zinc-500 font-mono tracking-wide">+63 (9936907577)</p>
+                <div className="absolute top-0 right-0 w-8 h-8 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-[-16px] right-[-16px] w-8 h-8 bg-red-500 rotate-45 opacity-20" />
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div className="group relative p-8 rounded-2xl bg-[#0a0a0d] border border-white/5 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/10 shadow-lg cursor-default h-full">
+                <div className="mb-5 text-zinc-600 transition-colors duration-300 group-hover:text-red-500 group-hover:scale-110 transform">
+                  <MapPin size={28}/>
+                </div>
+                <h4 className="text-white font-bold mb-2 tracking-tight">Deployment Zone</h4>
+                <p className="text-sm text-zinc-500 font-mono tracking-wide">Manila, Philippines</p>
+                <div className="absolute top-0 right-0 w-8 h-8 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-[-16px] right-[-16px] w-8 h-8 bg-red-500 rotate-45 opacity-20" />
+                </div>
+              </div>
+            </FadeIn>
           </div>
 
-          <div className="text-center mt-32 relative z-10 flex flex-col items-center">
+          <FadeIn className="text-center mt-32 relative z-10 flex flex-col items-center">
             <span className="px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-mono text-zinc-500 tracking-widest mb-6">Testimonials</span>
             <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2">Endorsements & Reviews</h3>
-            <h3 className="text-3xl md:text-5xl font-serif italic text-zinc-400">Trusted by 100+ peers, developers, and collaborators across the local tech and game dev ecosystem.</h3>
-            <p className="text-center text-[9px] font-mono text-zinc-600 tracking-widest uppercase mt-20">© 2026 // Engineered for Absolute Execution.</p>
-          </div>
+            <h3 className="text-2xl md:text-4xl font-serif italic text-zinc-500 max-w-4xl mx-auto leading-relaxed mt-4">
+              "Trusted by 100+ peers, developers, and collaborators across the local tech and game dev ecosystem."
+            </h3>
+            <p className="text-center text-[9px] font-mono text-zinc-600 tracking-widest uppercase mt-24">© 2026 // Engineered for Absolute Execution.</p>
+          </FadeIn>
         </div>
       </footer>
     </div>
