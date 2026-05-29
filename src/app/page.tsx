@@ -286,7 +286,7 @@ export default function SovereignCharacterPortfolio() {
   const circuitProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <div className="bg-[#0b0b0f] min-h-screen text-white font-sans selection:bg-red-600 selection:text-white relative pb-10 overflow-hidden">
+    <div className="bg-[#0b0b0f] min-h-screen text-white font-sans selection:bg-red-600 selection:text-white relative pb-10 overflow-hidden snap-y snap-proximity">
       
       {/* ========================================== */}
       {/* GLOBAL BACKGROUND DESIGN SYSTEMS           */}
@@ -312,7 +312,9 @@ export default function SovereignCharacterPortfolio() {
           <motion.path d="M 1400 100 L 1200 100 L 1100 800 L 1500 800" fill="transparent" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="5,5" />
         </svg>
       </div>
-      <div className="fixed left-4 md:left-12 top-0 bottom-0 w-[1px] bg-white/5 z-0 hidden md:block pointer-events-none">
+      
+      {/* MOVED CIRCUIT TO THE RIGHT SIDE */}
+      <div className="fixed right-4 md:right-12 top-0 bottom-0 w-[1px] bg-white/5 z-0 hidden md:block pointer-events-none">
         <motion.div style={{ scaleY: circuitProgress }} className="w-full h-full bg-red-600 origin-top shadow-[0_0_15px_#dc2626]" />
         <motion.div style={{ top: useTransform(circuitProgress, [0, 1], ["0%", "100%"]) }} className="absolute left-1/2 -translate-x-1/2 w-2 h-4 bg-white rounded-full shadow-[0_0_10px_#ffffff]" />
       </div>
@@ -329,9 +331,13 @@ export default function SovereignCharacterPortfolio() {
             <div className="absolute inset-0 rounded-full border border-red-500 scale-150 opacity-0 group-hover:scale-110 group-hover:opacity-100 transition-all" />
           </button>
           <div className="w-3 h-[1px] bg-white/10" />
-          <button onClick={() => scrollTo(reconRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Badge Book"><Swords size={16}/></button>
-          <button onClick={() => scrollTo(projectsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Projects"><Layers size={16}/></button>
-          <button onClick={() => scrollTo(recordsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Matrices"><Briefcase size={16}/></button>
+          
+          {/* Synchronized Icons */}
+          <button onClick={() => scrollTo(recordsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Passives"><Briefcase size={16}/></button>
+          <button onClick={() => scrollTo(reconRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Recon"><Swords size={16}/></button>
+          <button onClick={() => scrollTo(projectsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Architecture"><Layers size={16}/></button>
+          <button onClick={() => scrollTo(dataLogsRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Audit"><Activity size={16}/></button>
+          <div className="w-3 h-[1px] bg-white/10" />
           <button onClick={() => scrollTo(contactRef)} className="text-white/40 hover:text-red-500 transition-colors" title="Contact"><Mail size={16}/></button>
         </div>
       </div>
@@ -339,19 +345,41 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 01. THE GUILD CHARACTER DASHBOARD HERO     */}
       {/* ========================================== */}
-      <section ref={heroRef} className="relative w-full min-h-screen flex items-center justify-center p-4 md:p-8 pl-4 md:pl-24 overflow-hidden z-20">
+      <section ref={heroRef} className="relative min-h-screen w-full flex items-center justify-center p-4 md:px-24 overflow-hidden z-20 snap-start">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[70vh] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-600/10 via-transparent to-transparent blur-[100px] pointer-events-none z-0" />
         
         <div className="relative z-10 w-full max-w-[1400px] h-[85vh] min-h-[680px] bg-[#0b0b0f]/60 backdrop-blur-3xl border border-white/10 rounded-[40px] p-4 flex flex-col md:flex-row gap-4 shadow-2xl">
           
-          <div className={`hidden md:flex w-20 bg-white/[0.02] rounded-[32px] border border-white/5 flex-col items-center py-10 gap-10 transition-opacity duration-300 ${showHud ? 'opacity-0' : 'opacity-100'}`}>
-            <div className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center mb-4"><Hexagon size={18} className="fill-black" /></div>
-            <div className="flex flex-col gap-8 text-white/30">
-              <button onClick={() => scrollTo(reconRef)} className="hover:text-red-500 transition-colors"><Swords size={22} /></button>
-              <button onClick={() => scrollTo(projectsRef)} className="hover:text-red-500 transition-colors"><Layers size={22} /></button>
-              <button onClick={() => scrollTo(dataLogsRef)} className="hover:text-red-500 transition-colors"><Activity size={22} /></button>
+            <div className={`hidden md:flex w-20 bg-white/[0.02] rounded-[32px] border border-white/5 flex-col items-center py-8 justify-between transition-opacity duration-300 ${showHud ? 'opacity-0' : 'opacity-100'}`}>
+            {/* Top Brand Anchor */}
+            <div className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+              <Hexagon size={18} className="fill-black" />
             </div>
-            <div className="mt-auto"><Crosshair size={22} className="text-red-600 animate-pulse" /></div>
+            
+            {/* Synchronized Main Navigation Cluster */}
+            <div className="flex flex-col items-center gap-6 text-white/30 my-auto">
+              <div className="flex flex-col gap-6">
+                <button onClick={() => scrollTo(recordsRef)} title="Passives" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Briefcase size={22} /></button>
+                <button onClick={() => scrollTo(reconRef)} title="Recon" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Swords size={22} /></button>
+                <button onClick={() => scrollTo(projectsRef)} title="Architecture" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Layers size={22} /></button>
+                <button onClick={() => scrollTo(dataLogsRef)} title="Audit" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Activity size={22} /></button>
+              </div>
+
+              {/* Structural Section Divider */}
+              <div className="w-6 h-[1px] bg-white/10" />
+
+              {/* Contact Information Interface */}
+              <div className="flex flex-col gap-6">
+                <button onClick={() => scrollTo(contactRef)} title="Contact Info" className="hover:text-red-500 hover:scale-110 transition-all duration-200"><Mail size={22} /></button>
+              </div>
+            </div>
+            
+            {/* Bottom Target Interactive / Reticle */}
+            <div className="mt-auto pt-4">
+              <button onClick={() => scrollTo(heroRef)} title="Reset Targeting" className="text-red-600/60 hover:text-red-500 hover:scale-110 transition-all duration-200 group">
+                <Crosshair size={22} className="animate-pulse group-hover:rotate-90 transition-transform duration-300" />
+              </button>
+            </div>
           </div>
 
           <GlassPanel borderLabel="SYS.OP.AVATAR" className="flex-1 flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-transparent to-black/80">
@@ -406,23 +434,27 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 02. FULL-SCREEN CINEMATIC MASTER QUOTE     */}
       {/* ========================================== */}
-      <section className="min-h-[60vh] w-full flex items-center justify-center relative border-b border-white/5 pl-4 md:pl-24 snap-center overflow-hidden z-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.02)_0%,_transparent_100%)] pointer-events-none" />
+      <section className="h-screen w-full flex items-center justify-center relative border-b border-white/5 snap-start snap-always bg-zinc-950 overflow-hidden z-30">
+        <div className="absolute inset-0 bg-zinc-950 z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.04)_0%,_transparent_70%)] pointer-events-none z-0" />
         
-        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-white/[0.015] pointer-events-none whitespace-nowrap z-0 select-none">
+        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[24vw] font-black text-white/[0.015] pointer-events-none whitespace-nowrap z-0 select-none tracking-tighter">
           EXECUTION
         </h1>
 
-        <div className="max-w-5xl mx-auto text-center z-10 px-6 relative">
-          <div className="absolute -top-10 -left-10 text-red-600/20"><Terminal size={40} /></div>
-          <div className="absolute -bottom-10 -right-10 text-red-600/20"><Code size={40} /></div>
+        <div className="max-w-5xl mx-auto text-center z-10 px-6 relative w-full">
+          <div className="absolute -top-16 left-4 md:left-0 text-red-600/10"><Terminal size={48} /></div>
+          <div className="absolute -bottom-16 right-4 md:right-0 text-red-600/10"><Code size={48} /></div>
 
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-20%" }} transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-[80px] font-black text-white leading-[0.95] tracking-tighter uppercase relative z-10"
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: false, margin: "-10%" }} 
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl md:text-7xl lg:text-[90px] font-black text-white leading-[0.9] tracking-tighter uppercase relative z-10 select-none"
           >
             To command the vision, <br />
-            <span className="font-serif italic font-light text-red-600 lowercase tracking-normal">one must ruthlessly</span> <br />
+            <span className="font-serif italic font-light text-red-600 lowercase tracking-normal block my-2">one must ruthlessly</span>
             engineer the execution.
           </motion.h2>
         </div>
@@ -431,8 +463,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* NARRATIVE ACT I & II: The Foundation       */}
       {/* ========================================== */}
-      <section className="py-24 px-6 md:px-12 lg:px-32 max-w-7xl mx-auto z-20 relative pl-12 md:pl-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+      <section className="min-h-screen w-full flex items-center justify-center py-24 px-6 md:px-24 relative z-20 snap-start">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
             <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4">
                    <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
@@ -476,8 +508,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 06. EXECUTIVE RECORD (Character Passives)  */}
       {/* ========================================== */}
-      <section ref={recordsRef} className="py-24 px-6 md:px-12 pl-12 md:pl-32 bg-[#09090d]/80 border-y border-white/5 relative z-20 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto">
+      <section ref={recordsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/80 border-y border-white/5 relative z-20 backdrop-blur-sm snap-start">
+        <div className="max-w-7xl mx-auto w-full">
           
           <div className="mb-12">
             <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Verified Records</span>
@@ -531,7 +563,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* NARRATIVE ACT III: The Mission Bridge      */}
       {/* ========================================== */}
-      <section className="py-32 px-6 md:px-12 pl-12 md:pl-32 max-w-5xl mx-auto text-center z-20 relative">
+      <section className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start">
+        <div className="max-w-5xl mx-auto w-full text-center">
           <span className="text-red-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-6 block">ACT III // The Target Coordinates</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-10 text-white">The Mission Framework</h2>
           
@@ -554,13 +587,14 @@ export default function SovereignCharacterPortfolio() {
                &ldquo;I beg to differ. A man who follows the crowd will get no further than the crowd. The man who walks alone is bound to find himself in places no one has ever stepped before.&rdquo;
              </p>
           </div>
+        </div>
       </section>
 
       {/* ========================================== */}
       {/* 03. RECONNAISSANCE: THE PYRAMID BADGE BOOK */}
       {/* ========================================== */}
-      <section ref={reconRef} className="py-24 px-6 md:px-12 pl-12 md:pl-32 relative z-20 border-t border-white/5">
-        <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10">
+      <section ref={reconRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 relative z-20 border-t border-white/5 snap-start">
+        <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10 w-full">
           
           <div className="mb-20 text-center relative w-full max-w-2xl">
             <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Achievement Book</span>
@@ -667,8 +701,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 04. STRATEGIC ALLIANCES                    */}
       {/* ========================================== */}
-      <section className="py-16 border-y border-white/5 bg-[#0a0a0d] pl-12 md:pl-32 pr-6 md:pr-12 relative z-20">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-16 border-y border-white/5 bg-[#0a0a0d] px-6 md:px-24 relative z-20 snap-start">
+        <div className="max-w-6xl mx-auto w-full">
           <h3 className="text-center text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-12 flex items-center justify-center gap-4">
             <span className="w-8 h-[1px] bg-zinc-700"/> Ecosystem Trust & Alignments <span className="w-8 h-[1px] bg-zinc-700"/>
           </h3>
@@ -685,8 +719,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 05. CORE ENGINEERING (Projects Bento)      */}
       {/* ========================================== */}
-      <section ref={projectsRef} className="py-32 px-6 md:px-12 pl-12 md:pl-32 relative z-20">
-        <div className="max-w-7xl mx-auto">
+      <section ref={projectsRef} className="min-h-screen w-full flex flex-col justify-center py-32 px-6 md:px-24 relative z-20 snap-start border-t border-white/5">
+        <div className="max-w-7xl mx-auto w-full">
           
           <div className="mb-20">
             <span className="text-[10px] font-mono text-red-600 tracking-[0.2em] uppercase mb-4 block">// Phase 2</span>
@@ -787,8 +821,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 07. SYSTEM AUDIT                           */}
       {/* ========================================== */}
-      <section ref={dataLogsRef} className="py-24 px-6 md:px-12 lg:px-32 bg-[#0b0b0f] border-t border-white/5 relative z-20">
-        <div className="max-w-7xl mx-auto pl-0 md:pl-20">
+      <section ref={dataLogsRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#0b0b0f] border-t border-white/5 relative z-20 snap-start">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase">System Audit.</h2>
             <p className="text-red-600 font-mono text-xs uppercase tracking-widest mt-2">Verified Product Pipelines & Repositories</p>
@@ -817,8 +851,8 @@ export default function SovereignCharacterPortfolio() {
       {/* ========================================== */}
       {/* 08. SECURE CONTACT TERMINAL                */}
       {/* ========================================== */}
-      <footer ref={contactRef} className="py-32 px-6 md:px-12 lg:px-32 bg-[#09090d]/90 relative overflow-hidden border-t border-white/5 z-20 backdrop-blur-xl pl-12 md:pl-32">
-        <div className="max-w-6xl mx-auto relative z-10 pl-0 md:pl-10">
+      <footer ref={contactRef} className="min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-24 bg-[#09090d]/90 relative overflow-hidden border-t border-white/5 z-20 backdrop-blur-xl snap-start">
+        <div className="max-w-7xl mx-auto relative w-full z-10">
           
           <h1 className="absolute top-10 left-0 text-[18vw] font-black text-white/[0.02] leading-none tracking-tighter uppercase pointer-events-none select-none z-0 whitespace-nowrap">
             CONTACT
